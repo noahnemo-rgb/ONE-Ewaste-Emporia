@@ -1,0 +1,78 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               String       @id @default(cuid())
+  fullName         String
+  email            String       @unique
+  phone            String?
+  shippingStreet   String
+  shippingCity     String
+  shippingState    String
+  shippingZip      String
+  workOrders       WorkOrder[]
+  transactions     Transaction[]
+  createdAt        DateTime     @default(now())
+}
+
+model WorkOrder {
+  id                    String              @id @default(cuid())
+  userId                String
+  user                  User                @relation(fields: [userId], references: [id])
+  serviceType           String
+  deviceCategory        String
+  deviceModelDesc       String?
+  reportedIssue         String?
+  requiresDiagnostic    Boolean             @default(false)
+  diagnosticFeeStatus   String              @default("unpaid")
+  unrepairedDisposition String              @default("donate_to_guild")
+  status                String              @default("submitted")
+  donationAmount        Int                 @default(0)
+  estimates             DiagnosticEstimate[]
+  transactions          Transaction[]
+  auditLogs             CustodyLog[]
+  createdAt             DateTime            @default(now())
+}
+
+model DiagnosticEstimate {
+  id                String    @id @default(cuid())
+  workOrderId       String
+  workOrder         WorkOrder @relation(fields: [workOrderId], references: [id])
+  technicianNotes   String
+  partsCost         Int
+  laborCost         Int
+  diagnosticCredit  Int       @default(5000)
+  totalApprovedCost Int
+  estimateStatus    String    @default("pending")
+  createdAt         DateTime  @default(now())
+}
+
+model Transaction {
+  id                   String     @id @default(cuid())
+  workOrderId          String?
+  workOrder            WorkOrder? @relation(fields: [workOrderId], references: [id])
+  userId               String
+  user                 User       @relation(fields: [userId], references: [id])
+  stripePaymentIntentId String    @unique
+  transactionType      String
+  amount               Int
+  currency             String     @default("usd")
+  status               String
+  createdAt            DateTime   @default(now())
+}
+
+model CustodyLog {
+  id          String    @id @default(cuid())
+  workOrderId String
+  workOrder   WorkOrder @relation(fields: [workOrderId], references: [id])
+  actionType  String
+  performedBy String
+  details     String?
+  timestamp   DateTime  @default(now())
+}

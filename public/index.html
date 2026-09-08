@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ONE E-Waste Emporia — Repairs, Restorative Guild, Upcycling & Data Sanctuary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --bg-surface: rgba(18, 22, 34, 0.75);
+      --bg-surface-glass: rgba(255, 255, 255, 0.04);
+      --border-glass: rgba(255, 255, 255, 0.12);
+      --border-accent: rgba(255, 255, 255, 0.25);
+      --text-main: #f3f5f9;
+      --text-muted: #9ba3b8;
+      --text-dim: #647087;
+      --accent-iridescent: linear-gradient(135deg, #f77062 0%, #fe5196 25%, #c777e3 50%, #6d78d9 75%, #46aef7 100%);
+      --glow-spectrum: radial-gradient(circle at 50% 50%, rgba(199, 119, 227, 0.18), rgba(70, 174, 247, 0.12), transparent 70%);
+      --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.18), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.15), transparent 45%),
+        radial-gradient(circle at 50% 65%, rgba(244, 114, 182, 0.09), transparent 50%),
+        radial-gradient(circle at 50% 50%, #080b12 0%, #030407 100%);
+      background-attachment: fixed;
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(7, 9, 14, 0.85);
+      border-bottom: 1px solid var(--border-glass);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo-img {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 22px rgba(199, 119, 227, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .brand-titles { display: flex; flex-direction: column; }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: linear-gradient(120deg, #ffffff 40%, #c777e3 80%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: #ffffff; }
+
+    .nav-cta {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-glass);
+      color: #fff;
+      padding: 0.6rem 1.25rem;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: translateY(-1px);
+    }
+
+    main { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Hero */
+    .hero-section {
+      padding: 4.5rem 0 5rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3.5rem;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: #e2e8f0;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 10px #34d399;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 3.35rem;
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title .chromatic-text {
+      background: linear-gradient(135deg, #ffffff 10%, #f472b6 40%, #c084fc 70%, #60a5fa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero-desc {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      margin-bottom: 2.2rem;
+      line-height: 1.7;
+      max-width: 590px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #c084fc 0%, #6366f1 60%, #38bdf8 100%);
+      color: #ffffff;
+      padding: 0.95rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 30px -8px rgba(147, 51, 234, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px -8px rgba(147, 51, 234, 0.7);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      color: var(--text-main);
+      padding: 0.95rem 1.8rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .trust-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .trust-item { display: flex; flex-direction: column; }
+    .trust-val { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: #fff; }
+    .trust-lbl { font-size: 0.78rem; color: var(--text-dim); }
+
+    /* Orb */
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+    .orb-glow {
+      position: absolute; width: 480px; height: 480px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, rgba(56, 189, 248, 0.25) 40%, transparent 70%);
+      filter: blur(45px); z-index: 1; animation: pulseGlow 8s infinite alternate ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0% { transform: scale(0.92) rotate(0deg); opacity: 0.7; }
+      100% { transform: scale(1.08) rotate(15deg); opacity: 1; }
+    }
+
+    .logo-container {
+      position: relative; z-index: 2; border-radius: 50%; padding: 12px;
+      background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 50px rgba(199, 119, 227, 0.25);
+    }
+
+    .logo-img-main { width: 100%; max-width: 380px; height: auto; border-radius: 50%; display: block; }
+
+    /* Work Order Interactive Form Section */
+    .workorder-section {
+      background: linear-gradient(180deg, rgba(20, 24, 38, 0.9) 0%, rgba(10, 13, 22, 0.98) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: 28px;
+      padding: 3.5rem;
+      margin: 4rem 0 6rem;
+      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 3.5rem; align-items: start; }
+    .form-info h3 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; margin-bottom: 1rem; color: #fff; }
+    .form-info p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.8rem; }
+
+    .repair-notice-box {
+      background: rgba(192, 132, 252, 0.08);
+      border: 1px solid rgba(192, 132, 252, 0.25);
+      border-radius: 14px;
+      padding: 1.25rem;
+      margin-bottom: 1.8rem;
+    }
+    .repair-notice-box strong { display: block; color: #c084fc; font-size: 0.92rem; margin-bottom: 0.3rem; }
+    .repair-notice-box p { color: #cbd5e1; font-size: 0.82rem; margin: 0; line-height: 1.5; }
+
+    .wo-form {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 2.2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .form-group { margin-bottom: 1.3rem; }
+    .form-label {
+      display: block; font-size: 0.82rem; font-weight: 600; color: #cbd5e1;
+      margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%; background: rgba(10, 14, 24, 0.85); border: 1px solid var(--border-glass);
+      border-radius: 10px; padding: 0.8rem 1rem; color: #fff; font-family: inherit; font-size: 0.92rem;
+      outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: #c084fc; box-shadow: 0 0 12px rgba(192, 132, 252, 0.3);
+    }
+
+    /* Radio Dispositions Box */
+    .disposition-panel {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .radio-option {
+      display: flex; gap: 0.8rem; align-items: flex-start; margin-bottom: 0.8rem; cursor: pointer;
+    }
+    .radio-option:last-child { margin-bottom: 0; }
+    .radio-option input[type="radio"] { margin-top: 0.25rem; accent-color: #c084fc; }
+    .radio-text strong { display: block; font-size: 0.88rem; color: #fff; }
+    .radio-text span { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
+
+    /* Donation Add-on Pills */
+    .donation-pills { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.4rem; }
+    .pill-btn {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass);
+      color: #fff; padding: 0.45rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .pill-btn.active, .pill-btn:hover {
+      background: rgba(192, 132, 252, 0.2); border-color: #c084fc; color: #c084fc;
+    }
+
+    /* Checkout Cost Summary */
+    .checkout-summary {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .summary-row {
+      display: flex; justify-content: space-between; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.5rem;
+    }
+    .summary-row.total {
+      font-size: 1.05rem; font-weight: 700; color: #fff; border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 0.6rem; margin-top: 0.6rem; margin-bottom: 0;
+    }
+
+    .btn-submit {
+      width: 100%; background: linear-gradient(135deg, #c084fc 0%, #6366f1 100%);
+      color: #ffffff; padding: 1rem; border-radius: 10px; font-size: 1rem; font-weight: 700;
+      border: none; cursor: pointer; box-shadow: 0 8px 24px -5px rgba(147, 51, 234, 0.5);
+      transition: all 0.3s ease;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -5px rgba(147, 51, 234, 0.7); }
+
+    .legal-agreement-text {
+      font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 0.9rem; line-height: 1.5;
+    }
+    .legal-agreement-text a { color: #9ba3b8; text-decoration: underline; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-glass); background: rgba(5, 7, 11, 0.95);
+      padding: 4rem 1.5rem 3rem; color: var(--text-muted);
+    }
+    .footer-container {
+      max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .footer-col h4 {
+      font-family: var(--font-display); font-size: 0.95rem; color: #fff; font-weight: 700;
+      margin-bottom: 1.2rem; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s ease; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: 1240px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-dim);
+    }
+
+    @media (max-width: 992px) {
+      .hero-section { grid-template-columns: 1fr; text-align: center; }
+      .form-grid { grid-template-columns: 1fr; }
+      .footer-container { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .footer-container { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand-group">
+        <img src="assets/one_logo.jpg" alt="ONE E-Waste Emporia Emblem" class="brand-logo-img">
+        <div class="brand-titles">
+          <span class="brand-name">ONE Emporia</span>
+          <span class="brand-sub">Our New Era Church Ministry</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#mission">Agape Mission</a></li>
+        <li><a href="#repairs">Diagnostics & Repairs</a></li>
+        <li><a href="#workorder">Submit Work Order</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="privacy.html">Privacy</a></li>
+      </ul>
+      <a href="#workorder" class="nav-cta">Submit Work Order</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="mission">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          <span>Full-Service Diagnostics &bull; Restorative Justice &bull; Sacred Earth</span>
+        </div>
+        <h1 class="hero-title">
+          From Forgotten Silicon to <span class="chromatic-text">Sacred Renewal.</span>
+        </h1>
+        <p class="hero-desc">
+          Rooted in the unchanged agape teachings of Yeshua ben Yosef, the <strong>ONE E-Waste Emporia</strong> bridges ecological stewardship with human redemption. We provide professional diagnostics, certified repairs, forensic data sanitization, and dignified tech careers for individuals with disabilities and returning citizens.
+        </p>
+        <div class="hero-actions">
+          <a href="#workorder" class="btn-primary">
+            <span>Start A Work Order</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#repairs" class="btn-secondary">
+            <span>Diagnostic & Fee Details</span>
+          </a>
+        </div>
+
+        <div class="trust-strip">
+          <div class="trust-item">
+            <span class="trust-val">$50 Flat Deposit</span>
+            <span class="trust-lbl">Credited Toward Final Repair</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-val">Restorative Guild</span>
+            <span class="trust-lbl">Empowering Returning Citizens</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-val">NIST 800-88</span>
+            <span class="trust-lbl">Certified Data Sanitization</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-val">Stripe Secured</span>
+            <span class="trust-lbl">Encrypted 256-Bit Checkout</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="orb-glow"></div>
+        <div class="logo-container">
+          <img src="assets/one_logo.jpg" alt="ONE Church Liquid Glass Logo" class="logo-img-main">
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Order Wizard -->
+    <section class="workorder-section" id="workorder">
+      <div class="form-grid">
+        <div class="form-info">
+          <span style="color: #c084fc; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em;">Step 1: Intake & Work Order</span>
+          <h3>Initiate Your Service Request</h3>
+          <p>
+            Whether commissioning a diagnostic repair, donating unwanted electronics to our vocational guild, or recovering photos, your order is tracked from doorstep to workshop with absolute chain-of-custody transparency.
+          </p>
+
+          <div class="repair-notice-box" id="repairs">
+            <strong>Diagnostic Flat-Rate & Written Estimate Policy:</strong>
+            <p>
+              Diagnostic requests require an initial non-refundable flat fee of <strong>$50.00 USD</strong>. Our apprentice technicians and supervisory staff perform full hardware diagnostics and issue an itemized written estimate. If you approve the repair, <strong>100% of the $50 fee is credited toward your final repair invoice</strong>.
+            </p>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass); border-radius: 14px; padding: 1.25rem;">
+            <strong style="display: block; color: #fff; font-size: 0.9rem; margin-bottom: 0.4rem;">The Restorative Guild Mission:</strong>
+            <p style="font-size: 0.82rem; color: #9ba3b8; margin: 0; line-height: 1.6;">
+              100% of proceeds and voluntary contributions fund living wages and CompTIA A+ training for returning citizens rebuilding their lives after prison, and technicians with physical or neurodivergent disabilities.
+            </p>
+          </div>
+        </div>
+
+        <div class="wo-form">
+          <form id="workOrderForm" onsubmit="handleOrderSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Service Track</label>
+              <select class="form-select" id="serviceType" onchange="updateSummary()" required>
+                <option value="repair_diagnostic" selected>Diagnostic & Repair ($50 Flat Deposit)</option>
+                <option value="donation_upcycle">Charitable Donation / Upcycle (Free Intake)</option>
+                <option value="data_recovery">Forensic Data Recovery & Transfer ($75 Base)</option>
+                <option value="eco_recycle">Zero-Landfill Eco-Recycle (Free Intake)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Device Type & Description</label>
+              <select class="form-select" id="deviceType" style="margin-bottom: 0.6rem;" required>
+                <option value="laptop">Laptop / MacBook</option>
+                <option value="desktop">Desktop PC / Mac Mini / Tower</option>
+                <option value="phone">Smartphone / Tablet</option>
+                <option value="drive">Internal/External Hard Drive or SSD</option>
+                <option value="mixed">Mixed Lot / Multiple Devices</option>
+              </select>
+              <input type="text" class="form-input" id="deviceModel" placeholder="Brand & Model (e.g., ThinkPad T480, Dell XPS 15, iPhone 12)" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Reported Issue / Symptoms</label>
+              <textarea class="form-textarea" id="reportedIssue" rows="2" placeholder="e.g. Won't power on, cracked display, liquid spill, blue screen loop..."></textarea>
+            </div>
+
+            <!-- Disposition Matrix -->
+            <div class="form-group">
+              <label class="form-label">Unrepaired Disposition Directive</label>
+              <span style="font-size: 0.75rem; color: var(--text-dim); display: block; margin-bottom: 0.4rem;">If the repair is deemed impractical, or if you decline the written estimate:</span>
+              <div class="disposition-panel">
+                <label class="radio-option">
+                  <input type="radio" name="unrepairedDisposition" value="donate_to_guild" checked>
+                  <div class="radio-text">
+                    <strong>Donate to ONE Vocational Rehabilitation Guild</strong>
+                    <span>Gift hardware to apprentice training and digital inclusion grants (Tax-deductible receipt issued).</span>
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="unrepairedDisposition" value="return_wiped">
+                  <div class="radio-text">
+                    <strong>Return Unrepaired & Sanitized (NIST 800-88)</strong>
+                    <span>Drive is cryptographically erased before return. (Customer covers return shipping).</span>
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="unrepairedDisposition" value="return_unwiped">
+                  <div class="radio-text">
+                    <strong>Return Unrepaired & As-Is (Unwiped)</strong>
+                    <span>Shipped back in original condition. (Customer covers return shipping).</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Client Info -->
+            <div class="form-group">
+              <label class="form-label">Your Contact Details</label>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem;">
+                <input type="text" class="form-input" id="clientName" placeholder="Full Name" required>
+                <input type="email" class="form-input" id="clientEmail" placeholder="Email Address" required>
+              </div>
+              <input type="text" class="form-input" id="clientAddress" placeholder="Street Address, City, State, ZIP" required>
+            </div>
+
+            <!-- Optional Charitable Donation Add-on -->
+            <div class="form-group">
+              <label class="form-label">Optional Charitable Donation (Vocational Guild)</label>
+              <span style="font-size: 0.75rem; color: var(--text-dim); display: block;">Directly funds apprentice wages, tools, and refurbished laptops for low-income students.</span>
+              <div class="donation-pills">
+                <button type="button" class="pill-btn" onclick="setDonation(0, this)">$0</button>
+                <button type="button" class="pill-btn" onclick="setDonation(15, this)">+$15</button>
+                <button type="button" class="pill-btn" onclick="setDonation(35, this)">+$35</button>
+                <button type="button" class="pill-btn active" onclick="setDonation(50, this)">+$50</button>
+                <button type="button" class="pill-btn" onclick="setDonation(100, this)">+$100</button>
+              </div>
+            </div>
+
+            <!-- Live Cost Breakdown -->
+            <div class="checkout-summary">
+              <div class="summary-row">
+                <span id="serviceFeeLabel">Diagnostic Flat Deposit:</span>
+                <span id="serviceFeeVal">$50.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Inbound Pre-Paid Shipping:</span>
+                <span style="color: #34d399;">FREE</span>
+              </div>
+              <div class="summary-row">
+                <span>Charitable Ministry Gift:</span>
+                <span id="donationVal">$50.00</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total Due at Submission:</span>
+                <span id="totalDueVal" style="color: #c084fc;">$100.00</span>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+              Proceed to Stripe Secure Checkout &amp; Label
+            </button>
+
+            <p class="legal-agreement-text">
+              By submitting this work order, you agree to our 
+              <a href="terms.html" target="_blank">Terms of Service</a>, 
+              <a href="privacy.html" target="_blank">Privacy Policy</a>, and 
+              <a href="cookies.html" target="_blank">Cookie Policies</a>.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <div class="brand-group" style="margin-bottom: 0.8rem;">
+          <img src="assets/one_logo.jpg" alt="ONE E-Waste Emporia Emblem" class="brand-logo-img">
+          <div class="brand-titles">
+            <span class="brand-name">ONE Emporia</span>
+            <span class="brand-sub">Our New Era Worldwide Ministry</span>
+          </div>
+        </div>
+        <p style="font-size: 0.88rem; line-height: 1.7; max-width: 380px;">
+          Advancing the unchanged agape teachings of Yeshua ben Yosef through environmental stewardship, technology rehabilitation, and compassionate vocational empowerment.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services & Guilds</h4>
+        <ul class="footer-links">
+          <li><a href="#repairs">Diagnostic & Repairs</a></li>
+          <li><a href="#workorder">Vocational Rehab Guild</a></li>
+          <li><a href="#workorder">Data Sanctuary & Recovery</a></li>
+          <li><a href="#workorder">Sacred Earth Recycling</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal & Compliance</h4>
+        <ul class="footer-links">
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="privacy.html">Privacy & User Data</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="terms.html#disposition">Disposition Directives</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Ministry Contact</h4>
+        <ul class="footer-links">
+          <li><a href="#">501(c)(3) Documentation</a></li>
+          <li><a href="#">Apprentice Applications</a></li>
+          <li><a href="#">support@onechurch.global</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Our New Era (ONE) Church — ONE E-Waste Emporia. All rights reserved.</div>
+      <div>Operating under the universal agape of Yeshua ben Yosef.</div>
+    </div>
+  </footer>
+
+  <script>
+    let currentDonation = 50;
+
+    function setDonation(amount, btn) {
+      currentDonation = amount;
+      document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      updateSummary();
+    }
+
+    function updateSummary() {
+      const serviceType = document.getElementById('serviceType').value;
+      const serviceFeeLabel = document.getElementById('serviceFeeLabel');
+      const serviceFeeVal = document.getElementById('serviceFeeVal');
+      const donationVal = document.getElementById('donationVal');
+      const totalDueVal = document.getElementById('totalDueVal');
+      const submitBtn = document.getElementById('submitBtn');
+
+      let serviceFee = 0;
+      if (serviceType === 'repair_diagnostic') {
+        serviceFee = 50;
+        serviceFeeLabel.innerText = "Diagnostic Flat Deposit:";
+        serviceFeeVal.innerText = "$50.00";
+      } else if (serviceType === 'data_recovery') {
+        serviceFee = 75;
+        serviceFeeLabel.innerText = "Forensic Recovery Base:";
+        serviceFeeVal.innerText = "$75.00";
+      } else {
+        serviceFee = 0;
+        serviceFeeLabel.innerText = "Processing & Intake:";
+        serviceFeeVal.innerText = "FREE";
+      }
+
+      donationVal.innerText = currentDonation > 0 ? `$${currentDonation.toFixed(2)}` : "$0.00";
+      const total = serviceFee + currentDonation;
+      totalDueVal.innerText = `$${total.toFixed(2)}`;
+
+      if (total > 0) {
+        submitBtn.innerText = `Proceed to Stripe Checkout ($${total.toFixed(2)}) & Label`;
+      } else {
+        submitBtn.innerText = "Generate Pre-Paid Shipping Label (Free)";
+      }
+    }
+
+    async function handleOrderSubmit(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.innerText = "Connecting to Stripe...";
+      submitBtn.disabled = true;
+
+      const payload = {
+        fullName: document.getElementById('clientName').value,
+        email: document.getElementById('clientEmail').value,
+        address: document.getElementById('clientAddress').value,
+        serviceType: document.getElementById('serviceType').value,
+        deviceType: document.getElementById('deviceType').value,
+        deviceModel: document.getElementById('deviceModel').value,
+        reportedIssue: document.getElementById('reportedIssue').value,
+        unrepairedDisposition: document.querySelector('input[name="unrepairedDisposition"]:checked').value,
+        charitableDonation: currentDonation
+      };
+
+      try {
+        const response = await fetch('/api/work-orders/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        if (data.checkoutUrl) {
+          window.location.href = data.checkoutUrl;
+        } else {
+          alert(`Work Order ${data.workOrderId || ''} Confirmed! A pre-paid postal label has been dispatched to your email.`);
+          submitBtn.innerText = "Order Dispatched!";
+        }
+      } catch (err) {
+        // If running in local static preview mode without backend server
+        alert(`Work order recorded! (Simulated Mode: Work Order #WO-${Math.floor(Math.random()*90000+10000)}). When Stripe API keys are configured in .env, this redirects directly to Stripe Checkout.`);
+        submitBtn.innerText = "Work Order Dispatched!";
+        submitBtn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
