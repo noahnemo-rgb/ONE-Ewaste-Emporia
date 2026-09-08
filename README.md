@@ -37,20 +37,26 @@
 ONE-Ewaste-Emporia/
 ├── public/
 │   ├── index.html              # Main interactive landing page & work order wizard
-│   ├── terms.html              # Terms of Service & Repair Agreement
+│   ├── admin.html              # Apprentice & Supervisor Triage Workbench UI
+│   ├── terms.html              # Terms of Service & Diagnostic Repair Agreement
 │   ├── privacy.html            # Privacy Policy & User Data Handling
 │   ├── cookies.html            # Cookie Policy
 │   └── assets/
 │       └── one_logo.jpg        # ONE Church liquid glass emblem
 ├── src/
 │   ├── server/
-│   │   └── server.js           # Express API, Stripe Checkout & Webhook handler
+│   │   ├── server.js           # Express API, Stripe Checkout & Webhook handler
+│   │   ├── shipping.js         # EasyPost / USPS automated return label service
+│   │   ├── notifications.js    # Resend email & Twilio out-of-band SMS service
+│   │   └── storage.js          # Encrypted Cloud Vault pre-signed URL generator
 │   └── database/
 │       ├── schema.sql          # SQL Schema (PostgreSQL / SQLite)
 │       └── schema.prisma       # Prisma ORM Schema
 ├── .env.example                # Configuration template
 ├── package.json                # Node.js dependencies & scripts
 ├── STRIPE_SETUP.md             # Stripe merchant account activation walkthrough
+├── DATA_RECOVERY_PROTOCOL.md   # Secure data return, encryption & custody protocol
+├── WORKSHOP_SAFETY_AND_APPRENTICE_SOP.md # Apprentice syllabus, triage & safety SOP
 └── README.md                   # System documentation
 ```
 

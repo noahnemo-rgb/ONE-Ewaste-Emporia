@@ -544,6 +544,43 @@
               <textarea class="form-textarea" id="reportedIssue" rows="2" placeholder="e.g. Won't power on, cracked display, liquid spill, blue screen loop..."></textarea>
             </div>
 
+            
+            <!-- Data Return Method (Interactive selection when Data Recovery is chosen) -->
+            <div class="form-group" id="dataReturnGroup" style="display: none;">
+              <label class="form-label">Data Sanctuary: Return Method</label>
+              <span style="font-size: 0.75rem; color: var(--text-dim); display: block; margin-bottom: 0.4rem;">How would you like your recovered photos and records securely returned?</span>
+              <div class="disposition-panel">
+                <label class="radio-option">
+                  <input type="radio" name="dataReturnMethod" value="cloud_vault" checked onchange="updateSummary()">
+                  <div class="radio-text">
+                    <strong>Encrypted Cloud Vault (Included Free)</strong>
+                    <span>Expiring 14-day download link with AES-256 encryption. Decryption PIN sent via separate SMS.</span>
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="dataReturnMethod" value="usb_new_128gb" onchange="updateSummary()">
+                  <div class="radio-text">
+                    <strong>Hardware-Encrypted 128GB USB 3.2 Drive (+ $25)</strong>
+                    <span>New factory-sealed drive formatted with AES-256 encryption. Key sent out-of-band upon postal delivery.</span>
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="dataReturnMethod" value="usb_new_1tb_ssd" onchange="updateSummary()">
+                  <div class="radio-text">
+                    <strong>Hardware-Encrypted 1TB External SSD (+ $85)</strong>
+                    <span>High-capacity external solid state drive for large photo/video archives. Signature-required courier.</span>
+                  </div>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="dataReturnMethod" value="client_supplied_drive" onchange="updateSummary()">
+                  <div class="radio-text">
+                    <strong>I Am Including A Spare USB Drive in My Box (Free)</strong>
+                    <span>Include your own clean external drive in the parcel with your computer.</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
             <!-- Disposition Matrix -->
             <div class="form-group">
               <label class="form-label">Unrepaired Disposition Directive</label>
@@ -694,7 +731,17 @@
       updateSummary();
     }
 
+    
+    function toggleDataReturn() {
+      const serviceType = document.getElementById('serviceType').value;
+      const dataGroup = document.getElementById('dataReturnGroup');
+      if (dataGroup) {
+        dataGroup.style.display = (serviceType === 'data_recovery') ? 'block' : 'none';
+      }
+    }
+
     function updateSummary() {
+      toggleDataReturn();
       const serviceType = document.getElementById('serviceType').value;
       const serviceFeeLabel = document.getElementById('serviceFeeLabel');
       const serviceFeeVal = document.getElementById('serviceFeeVal');

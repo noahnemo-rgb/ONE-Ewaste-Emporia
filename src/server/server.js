@@ -8,6 +8,11 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
+
+const shippingService = require('./shipping');
+const notificationService = require('./notifications');
+const storageService = require('./storage');
+
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder');
 
 const app = express();
@@ -183,6 +188,42 @@ app.get('/api/work-orders/:id', (req, res) => {
   const wo = db.workOrders.find(w => w.id === req.params.id);
   if (!wo) return res.status(404).json({ error: 'Work order not found.' });
   res.json(wo);
+});
+
+
+// -------------------------------------------------------------
+// API: Dispatch Shipping Label for Work Order
+// -------------------------------------------------------------
+app.post('/api/shipping/generate-label', async (req, res) => {
+  try {
+    const { workOrderId, clientDetails, serviceType } = req.body;
+    const labelData = await shippingService.generateInboundLabel(clientDetails, serviceType);
+
+    // Send confirmation email
+    await notificationService.sendOrderConfirmation(clientDetails.email, { workOrderId, ...clientDetails, serviceType }, labelData.labelUrl);
+
+    res.json({ success: true, ...labelData });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// -------------------------------------------------------------
+// API: Generate Cloud Vault Download Link for Recovered Data
+// -------------------------------------------------------------
+app.post('/api/vault/generate-download', async (req, res) => {
+  try {
+    const { workOrderId, archiveFilename, clientPhone } = req.body;
+    const vault = await storageService.generateSecureDownloadUrl(workOrderId, archiveFilename);
+    const pin = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Send PIN out-of-band via SMS
+    await notificationService.sendDataRecoveryPasskey(clientPhone, workOrderId, pin);
+
+    res.json({ success: true, ...vault });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.listen(PORT, () => {
