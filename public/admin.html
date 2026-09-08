@@ -122,7 +122,7 @@
         <thead>
           <tr>
             <th>Order ID</th>
-            <th>Client</th>
+            <th>Client & Phone</th>
             <th>Device</th>
             <th>Track</th>
             <th>Disposition If Unrepaired</th>
@@ -133,7 +133,7 @@
         <tbody id="orderTableBody">
           <tr>
             <td><strong>WO-8X92A</strong></td>
-            <td>Miriam B.</td>
+            <td>Miriam B.<br><span style='font-size:0.75rem; color:var(--muted);'>(555) 234-8901</span></td>
             <td>ThinkPad T480</td>
             <td><span class="tag tag-repair">Repair ($50 Paid)</span></td>
             <td>Donate to Guild</td>
@@ -142,7 +142,7 @@
           </tr>
           <tr>
             <td><strong>WO-7P31B</strong></td>
-            <td>Thomas K.</td>
+            <td>Thomas K.<br><span style='font-size:0.75rem; color:var(--muted);'>(555) 871-3329</span></td>
             <td>MacBook Air M1</td>
             <td><span class="tag tag-recovery">Data Recovery</span></td>
             <td>Encrypted Cloud Vault</td>
@@ -151,7 +151,7 @@
           </tr>
           <tr>
             <td><strong>WO-4N19C</strong></td>
-            <td>St. Jude Ministry</td>
+            <td>St. Jude Ministry<br><span style='font-size:0.75rem; color:var(--muted);'>(555) 412-9090</span></td>
             <td>5x Dell OptiPlex</td>
             <td><span class="tag tag-donation">Upcycle / Donate</span></td>
             <td>Guild Teardown/Grant</td>
@@ -165,7 +165,10 @@
     <!-- Right: Technician Triage & Estimate Builder -->
     <div class="panel">
       <div class="panel-title">
-        <span id="activeOrderTitle">Triage Bench: WO-8X92A</span>
+        <div>
+          <span id="activeOrderTitle" style="display:block;">Triage Bench: WO-8X92A</span>
+          <span id="activeOrderPhone" style="font-size: 0.78rem; color: var(--accent-blue); font-family: monospace;">Phone: (555) 234-8901 (Direct Tech Line)</span>
+        </div>
         <span class="tag tag-repair" id="activeOrderTag">Repair</span>
       </div>
 
@@ -223,8 +226,10 @@
       document.getElementById('netEstimateVal').innerText = `$${net.toFixed(2)}`;
     }
 
-    function selectOrder(id, device, client, type) {
+    function selectOrder(id, device, client, type, phone = '(555) 234-8901') {
       document.getElementById('activeOrderTitle').innerText = `Triage Bench: ${id} (${device})`;
+      const phoneEl = document.getElementById('activeOrderPhone');
+      if (phoneEl) phoneEl.innerText = `Phone: ${phone} (Direct Tech Line)`;
     }
 
     function handleScan(e) {

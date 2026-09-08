@@ -617,6 +617,10 @@
                 <input type="text" class="form-input" id="clientName" placeholder="Full Name" required>
                 <input type="email" class="form-input" id="clientEmail" placeholder="Email Address" required>
               </div>
+              <div style="margin-bottom: 0.6rem;">
+                <input type="tel" class="form-input" id="clientPhone" placeholder="Phone Number (for technician diagnostics, estimate updates & data passkeys)" required>
+                <span style="font-size: 0.72rem; color: var(--text-dim); display: block; margin-top: 0.25rem;">Used by apprentice technicians and lab supervisors if clarification is needed regarding your hardware or data recovery.</span>
+              </div>
               <input type="text" class="form-input" id="clientAddress" placeholder="Street Address, City, State, ZIP" required>
             </div>
 
@@ -784,6 +788,7 @@
       const payload = {
         fullName: document.getElementById('clientName').value,
         email: document.getElementById('clientEmail').value,
+        phone: document.getElementById('clientPhone').value,
         address: document.getElementById('clientAddress').value,
         serviceType: document.getElementById('serviceType').value,
         deviceType: document.getElementById('deviceType').value,
