@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ONE E-Waste Emporia — Sacred Renewal, Upcycling & Data Sanctuary</title>
+  <title>ONE E-Waste Emporia — Sacred Renewal, Upcycling, Data Sanctuary & Restorative Guild</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,6 @@
       --text-muted: #9ba3b8;
       --text-dim: #647087;
       --accent-iridescent: linear-gradient(135deg, #f77062 0%, #fe5196 25%, #c777e3 50%, #6d78d9 75%, #46aef7 100%);
-      --glow-spectrum: radial-gradient(circle at 50% 50%, rgba(199, 119, 227, 0.18), rgba(70, 174, 247, 0.12), transparent 70%);
       --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-display: 'Space Grotesk', sans-serif;
     }
@@ -37,9 +36,9 @@
       overflow-x: hidden;
       min-height: 100vh;
       background-image: 
-        radial-gradient(circle at 20% 15%, rgba(139, 92, 246, 0.15), transparent 40%),
-        radial-gradient(circle at 80% 25%, rgba(56, 189, 248, 0.12), transparent 45%),
-        radial-gradient(circle at 50% 70%, rgba(244, 114, 182, 0.08), transparent 50%),
+        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.18), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.15), transparent 45%),
+        radial-gradient(circle at 50% 65%, rgba(244, 114, 182, 0.09), transparent 50%),
         radial-gradient(circle at 50% 50%, #080b12 0%, #030407 100%);
       background-attachment: fixed;
     }
@@ -51,7 +50,7 @@
       z-index: 100;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(7, 9, 14, 0.8);
+      background: rgba(7, 9, 14, 0.82);
       border-bottom: 1px solid var(--border-glass);
       transition: all 0.3s ease;
     }
@@ -108,14 +107,14 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.8rem;
       list-style: none;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 500;
       transition: color 0.2s ease;
     }
@@ -166,7 +165,7 @@
       gap: 0.6rem;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-glass);
-      padding: 0.35rem 0.9rem;
+      padding: 0.35rem 0.95rem;
       border-radius: 999px;
       font-size: 0.8rem;
       color: #e2e8f0;
@@ -184,9 +183,9 @@
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: 3.4rem;
+      font-size: 3.35rem;
       font-weight: 700;
-      line-height: 1.12;
+      line-height: 1.14;
       letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
     }
@@ -203,7 +202,7 @@
       color: var(--text-muted);
       margin-bottom: 2.2rem;
       line-height: 1.7;
-      max-width: 580px;
+      max-width: 590px;
     }
 
     .hero-actions {
@@ -260,6 +259,7 @@
 
     .trust-strip {
       display: flex;
+      flex-wrap: wrap;
       gap: 1.8rem;
       padding-top: 1.5rem;
       border-top: 1px solid rgba(255, 255, 255, 0.07);
@@ -347,13 +347,13 @@
     }
 
     .card-top {
-      top: 10%;
-      right: -5%;
+      top: 8%;
+      right: -6%;
       animation-delay: -1s;
     }
 
     .card-bottom {
-      bottom: 8%;
+      bottom: 6%;
       left: -8%;
       animation-delay: -3.5s;
     }
@@ -411,15 +411,15 @@
     .section-sub {
       color: var(--text-muted);
       font-size: 1.05rem;
-      max-width: 650px;
+      max-width: 680px;
       margin: 0 auto;
     }
 
-    /* Pillars Grid */
+    /* The 4 Pillars Grid */
     .pillars-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
       margin-bottom: 5rem;
     }
 
@@ -427,7 +427,7 @@
       background: var(--bg-surface);
       border: 1px solid var(--border-glass);
       border-radius: 20px;
-      padding: 2.2rem 1.8rem;
+      padding: 2.3rem 2rem;
       position: relative;
       overflow: hidden;
       backdrop-filter: blur(12px);
@@ -482,8 +482,8 @@
 
     .pillar-desc {
       color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.6;
+      font-size: 0.94rem;
+      line-height: 1.65;
       margin-bottom: 1.5rem;
       flex-grow: 1;
     }
@@ -499,9 +499,152 @@
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 6px;
-      padding: 0.25rem 0.6rem;
+      padding: 0.28rem 0.65rem;
       font-size: 0.75rem;
       color: #cbd5e1;
+    }
+
+    /* Restorative Vocational Rehabilitation Spotlight */
+    .rehab-spotlight {
+      background: linear-gradient(135deg, rgba(30, 24, 48, 0.8) 0%, rgba(14, 20, 36, 0.9) 100%);
+      border: 1px solid rgba(192, 132, 252, 0.3);
+      border-radius: 28px;
+      padding: 3.5rem;
+      margin-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+    }
+
+    .rehab-spotlight::after {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.25), transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    .rehab-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .rehab-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(192, 132, 252, 0.15);
+      border: 1px solid rgba(192, 132, 252, 0.4);
+      color: #e9d5ff;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .rehab-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.2rem;
+      line-height: 1.2;
+    }
+
+    .rehab-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.8rem;
+    }
+
+    .rehab-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .rehab-point {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .rp-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #c084fc;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .rp-text strong {
+      display: block;
+      color: #f8fafc;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .rp-text span {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    .rehab-card-box {
+      background: rgba(10, 14, 24, 0.75);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .rc-stat {
+      margin-bottom: 1.5rem;
+    }
+
+    .rc-stat-val {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #38bdf8, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+
+    .rc-stat-lbl {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.3rem;
+    }
+
+    .quote-box {
+      border-left: 2px solid #c084fc;
+      padding-left: 1rem;
+      font-style: italic;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+      line-height: 1.6;
     }
 
     /* Pipeline */
@@ -559,18 +702,6 @@
       box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.7);
       position: relative;
       overflow: hidden;
-    }
-
-    .request-section::before {
-      content: '';
-      position: absolute;
-      top: -150px;
-      right: -150px;
-      width: 350px;
-      height: 350px;
-      background: radial-gradient(circle, rgba(192, 132, 252, 0.25), transparent 70%);
-      filter: blur(60px);
-      pointer-events: none;
     }
 
     .form-grid {
@@ -800,6 +931,10 @@
       .pillars-grid {
         grid-template-columns: 1fr;
       }
+      .rehab-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
       .pipeline-steps {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
@@ -815,7 +950,7 @@
 
     @media (max-width: 640px) {
       .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.4rem;
       }
       .nav-links {
         display: none;
@@ -848,7 +983,8 @@
       </a>
       <ul class="nav-links">
         <li><a href="#mission">Agape Stewardship</a></li>
-        <li><a href="#services">The Three Paths</a></li>
+        <li><a href="#pillars">Four Pillars</a></li>
+        <li><a href="#vocational">Vocational Rehab</a></li>
         <li><a href="#how-it-works">Mail-In Pipeline</a></li>
         <li><a href="#request">Intake & Labels</a></li>
       </ul>
@@ -862,36 +998,40 @@
       <div class="hero-content">
         <div class="hero-badge">
           <span class="dot"></span>
-          <span>Agape in Action &bull; Sacred Earth Stewardship &bull; Emporia Hub</span>
+          <span>Agape in Action &bull; Restorative Justice &bull; Sacred Earth</span>
         </div>
         <h1 class="hero-title">
           From Forgotten Silicon to <span class="chromatic-text">Sacred Renewal.</span>
         </h1>
         <p class="hero-desc">
-          Rooted in the original, unchanged agape teachings of Yeshua ben Yosef, the <strong>ONE E-Waste Emporia</strong> transforms retired electronics into community connectivity, recovers irreplaceable personal memories, and guarantees zero-landfill ecological stewardship.
+          Rooted in the original, unchanged agape teachings of Yeshua ben Yosef, the <strong>ONE E-Waste Emporia</strong> bridges ecological stewardship with human redemption. We transform discarded tech into living livelihoods through hands-on vocational rehabilitation for the disabled and returning citizens rebuilding life after incarceration.
         </p>
         <div class="hero-actions">
           <a href="#request" class="btn-primary">
             <span>Request Pre-Paid Mailer</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
-          <a href="#services" class="btn-secondary">
-            <span>Explore Emporia Services</span>
+          <a href="#vocational" class="btn-secondary">
+            <span>Vocational Rehabilitation</span>
           </a>
         </div>
 
         <div class="trust-strip">
           <div class="trust-item">
+            <span class="trust-val">Restorative Guild</span>
+            <span class="trust-lbl">Empowering Returning Citizens</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-val">Universal Access</span>
+            <span class="trust-lbl">Adaptive Workstations for Disabled</span>
+          </div>
+          <div class="trust-item">
             <span class="trust-val">NIST 800-88</span>
             <span class="trust-lbl">Certified Sanitization</span>
           </div>
           <div class="trust-item">
-            <span class="trust-val">100% Zero Landfill</span>
-            <span class="trust-lbl">R2v3 Downstream Partner</span>
-          </div>
-          <div class="trust-item">
-            <span class="trust-val">501(c)(3)</span>
-            <span class="trust-lbl">Tax-Deductible Receipts</span>
+            <span class="trust-val">R2v3 Partner</span>
+            <span class="trust-lbl">Zero Landfill Commitment</span>
           </div>
         </div>
       </div>
@@ -903,10 +1043,10 @@
         </div>
 
         <div class="floating-card card-top">
-          <div class="icon-chip">&#9672;</div>
+          <div class="icon-chip">&#9874;</div>
           <div class="fc-text">
-            <strong>Data Sanctuary</strong>
-            <span>Bit-level forensic extraction</span>
+            <strong>Restorative Guild</strong>
+            <span>Training & certified tech careers</span>
           </div>
         </div>
 
@@ -914,60 +1054,131 @@
           <div class="icon-chip">&#9851;</div>
           <div class="fc-text">
             <strong>Digital Bridges</strong>
-            <span>Upcycling tools for families</span>
+            <span>Restored tech gifted to families</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- The 3 Pillars / Services -->
-    <section id="services">
+    <!-- The 4 Pillars / Services -->
+    <section id="pillars">
       <div class="section-heading">
-        <div class="section-eyebrow">A Holistic Lifecycle</div>
-        <h2 class="section-title">The Three Paths of Technology</h2>
+        <div class="section-eyebrow">A Holistic Lifecycle of Agape</div>
+        <h2 class="section-title">The Four Pillars of Sacred Technology</h2>
         <p class="section-sub">
-          Every device entrusted to ONE E-Waste Emporia is handled with care, reverence for privacy, and commitment to human flourishing.
+          Every device entrusted to ONE E-Waste Emporia undergoes a purposeful journey of technical precision, environmental protection, and restorative human dignity.
         </p>
       </div>
 
       <div class="pillars-grid">
+        <!-- Pillar 1 -->
+        <div class="pillar-card" style="--card-accent: linear-gradient(90deg, #c084fc, #f472b6);">
+          <div class="pillar-icon-box">&#9874;</div>
+          <h3 class="pillar-title">1. Vocational Rehabilitation Guild</h3>
+          <p class="pillar-desc">
+            Our repair benches serve as classrooms of redemption and hope. We provide supportive, paid vocational apprenticeships, CompTIA A+ hardware certifications, and dignified career pathways for individuals with disabilities and men and women transitioning home from prison.
+          </p>
+          <ul class="pillar-tags">
+            <li>Re-entry Vocational Pathways</li>
+            <li>Adaptive Benches for Disabled</li>
+            <li>CompTIA A+ & Electronics Certs</li>
+            <li>Dignified Living Wage Training</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 2 -->
         <div class="pillar-card" style="--card-accent: linear-gradient(90deg, #38bdf8, #818cf8);">
           <div class="pillar-icon-box">&#128274;</div>
-          <h3 class="pillar-title">1. Data Sanctuary & Recovery</h3>
+          <h3 class="pillar-title">2. Data Sanctuary & Recovery</h3>
           <p class="pillar-desc">
-            Locked or unbootable drives hold family memories, historical records, and cherished photos. We extract your files using non-invasive write-blockers, followed by NIST SP 800-88 certified cryptographic wiping.
+            Locked or unbootable drives hold family memories, historical records, and cherished photos. We extract your files using non-invasive write-blockers, followed by NIST SP 800-88 certified cryptographic wiping to guarantee absolute privacy.
           </p>
           <ul class="pillar-tags">
             <li>Forensic Bit-Stream Image</li>
             <li>Cloud Delivery / Encrypted USB</li>
             <li>Cryptographic Wipe Certificate</li>
+            <li>Strict Chain of Custody</li>
           </ul>
         </div>
 
-        <div class="pillar-card" style="--card-accent: linear-gradient(90deg, #c084fc, #f472b6);">
+        <!-- Pillar 3 -->
+        <div class="pillar-card" style="--card-accent: linear-gradient(90deg, #a78bfa, #60a5fa);">
           <div class="pillar-icon-box">&#9881;</div>
-          <h3 class="pillar-title">2. Refurbish & Upcycle</h3>
+          <h3 class="pillar-title">3. Upcycle & Digital Inclusion</h3>
           <p class="pillar-desc">
-            Viable laptops and desktops are cleaned, fitted with high-speed SSDs, upgraded, and loaded with secure, open-source software. Devices are gifted to local students, seniors, and underprivileged communities.
+            Viable laptops and desktops are cleaned, upgraded with high-speed SSDs and RAM, and loaded with secure, open-source software. Restored computers are gifted to local school students, seniors, and underprivileged communities.
           </p>
           <ul class="pillar-tags">
             <li>SSD & RAM Upgrades</li>
-            <li>Digital Inclusion Ministry</li>
-            <li>Youth Vocational Training</li>
+            <li>Digital Divide Eradication</li>
+            <li>Free Software Suites</li>
+            <li>Church Community Grants</li>
           </ul>
         </div>
 
+        <!-- Pillar 4 -->
         <div class="pillar-card" style="--card-accent: linear-gradient(90deg, #34d399, #10b981);">
           <div class="pillar-icon-box">&#9851;</div>
-          <h3 class="pillar-title">3. Sacred Earth Recycling</h3>
+          <h3 class="pillar-title">4. Sacred Earth Recycling</h3>
           <p class="pillar-desc">
-            Irreparable machines are dismantled down to clean raw materials: aluminum, copper, silicon, and gold. Partnered with R2v3-certified recyclers to ensure zero toxic waste reaches landfills or developing shores.
+            Irreparable machines are dismantled down to clean raw materials: aluminum, copper, silicon, and gold. Partnered with R2v3-certified recyclers to ensure zero toxic waste reaches landfills or vulnerable developing nations.
           </p>
           <ul class="pillar-tags">
             <li>Zero Toxic Export</li>
             <li>Safe Lithium Battery Handling</li>
             <li>Raw Material Reclamation</li>
+            <li>Eco-Stewardship Audit</li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Restorative Guild Spotlight Section -->
+    <section class="rehab-spotlight" id="vocational">
+      <div class="rehab-grid">
+        <div>
+          <div class="rehab-badge">&#10022; Restorative Rehabilitation Ministry</div>
+          <h2 class="rehab-title">Rebuilding Lives Through Purposeful Craftsmanship</h2>
+          <p class="rehab-desc">
+            In the unchanged agape teachings of Yeshua ben Yosef, no person is disposable. Society often discards both obsolete technology and individuals facing barriers to work. The ONE E-Waste Emporia brings both into renewal through structured, compassionate vocational empowerment.
+          </p>
+          <ul class="rehab-points">
+            <li class="rehab-point">
+              <div class="rp-icon">&#10003;</div>
+              <div class="rp-text">
+                <strong>Empowering Re-entering Citizens</strong>
+                <span>We partner with halfway houses, state re-entry programs, and faith-based prison ministries to provide hands-on training, fair-chance employment, and professional mentorship as returning citizens rebuild their independent lives.</span>
+              </div>
+            </li>
+            <li class="rehab-point">
+              <div class="rp-icon">&#9855;</div>
+              <div class="rp-text">
+                <strong>Inclusive Workstations for the Disabled</strong>
+                <span>Our workshop features ergonomic, ADA-compliant diagnostic benches, screen magnifiers, specialized tactile tools, and flexible scheduling designed to empower neurodivergent and physically disabled individuals with meaningful tech careers.</span>
+              </div>
+            </li>
+            <li class="rehab-point">
+              <div class="rp-icon">&#9733;</div>
+              <div class="rp-text">
+                <strong>Industry-Recognized Credentials</strong>
+                <span>Apprentices master micro-soldering, board-level component diagnosis, NIST 800-88 data sanitization, and prepare for industry-standard CompTIA A+ certifications.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rehab-card-box">
+          <div class="rc-stat">
+            <div class="rc-stat-val">0%</div>
+            <div class="rc-stat-lbl">Recidivism rate target among our church apprentice cohort through holistic support, housing assistance, and mentorship.</div>
+          </div>
+          <div class="rc-stat" style="margin-top: 1.5rem;">
+            <div class="rc-stat-val">100%</div>
+            <div class="rc-stat-lbl">Living wage vocational training funded by community hardware donations and refurbishment revenue.</div>
+          </div>
+          <div class="quote-box" style="margin-top: 2rem;">
+            &ldquo;As we restore forgotten silicon, we restore the sacred dignity of every soul who touches it. In agape, no life and no creation is beyond redemption.&rdquo;
+          </div>
         </div>
       </div>
     </section>
@@ -978,7 +1189,7 @@
         <div class="section-eyebrow">Simple & Transparent</div>
         <h2 class="section-title">How The Mail-In Emporia Works</h2>
         <p class="section-sub">
-          From your doorstep to our secure church workshop in four straightforward steps.
+          From your doorstep to our restorative church workshop in four straightforward steps.
         </p>
       </div>
 
@@ -987,7 +1198,7 @@
           <div class="step-number">01</div>
           <div class="step-title">Request a Mailer</div>
           <div class="step-desc">
-            Fill out our intake form to receive a digital prepaid shipping label or a complete anti-static padded mailer box.
+            Fill out our intake form to receive a digital prepaid shipping label or an anti-static padded mailer box.
           </div>
         </div>
 
@@ -1001,9 +1212,9 @@
 
         <div class="pipeline-step">
           <div class="step-number">03</div>
-          <div class="step-title">Triage & Sanitization</div>
+          <div class="step-title">Triage & Apprentice Training</div>
           <div class="step-desc">
-            Trained technicians handle forensic data recovery, followed by military-grade wiping and diagnostic triage.
+            Our vocational apprentice technicians perform forensic data recovery, NIST 800-88 wiping, and hardware diagnostics.
           </div>
         </div>
 
@@ -1011,7 +1222,7 @@
           <div class="step-number">04</div>
           <div class="step-title">Impact & Certificate</div>
           <div class="step-desc">
-            Receive an official Certificate of Data Destruction and a tax-deductible donation receipt showing your community impact.
+            Receive your official Certificate of Data Destruction and a tax-deductible donation receipt celebrating lives impacted.
           </div>
         </div>
       </div>
@@ -1024,7 +1235,7 @@
           <div class="section-eyebrow">Get Started Today</div>
           <h3>Send Your Electronics Into Purpose</h3>
           <p>
-            Whether clearing out old office equipment or recovering photos from a laptop that will no longer turn on, our team at ONE E-Waste Emporia is honored to serve you with transparency, reverence, and technical precision.
+            Whether clearing out old office equipment, recovering photos from an old laptop, or sponsoring our vocational rehabilitation benches, our team at ONE E-Waste Emporia is honored to serve you with transparency, reverence, and technical precision.
           </p>
           <ul class="info-list">
             <li class="info-item">
@@ -1033,11 +1244,11 @@
             </li>
             <li class="info-item">
               <span class="info-check">&#10003;</span>
-              <span>Rigorous chain of custody logging for complete personal data security.</span>
+              <span>Directly funds vocational training for disabled individuals and returning citizens.</span>
             </li>
             <li class="info-item">
               <span class="info-check">&#10003;</span>
-              <span>100% of proceeds fund community tech workshops and device grants.</span>
+              <span>NIST SP 800-88 certified cryptographic wiping guarantee.</span>
             </li>
           </ul>
         </div>
@@ -1047,9 +1258,10 @@
             <div class="form-group">
               <label class="form-label">Primary Service Desired</label>
               <select class="form-select" id="serviceType" required>
-                <option value="donation">Donate & Upcycle for Families</option>
+                <option value="donation">Donate & Upcycle (Supports Vocational Guild)</option>
                 <option value="recovery">Data Recovery & Secure Cloud Transfer</option>
                 <option value="recycle">Eco-Recycle & Certified Wipe Only</option>
+                <option value="apprentice">Inquire About Vocational Apprentice Program</option>
                 <option value="enterprise">Corporate / Ministry Bulk Decommission</option>
               </select>
             </div>
@@ -1100,26 +1312,26 @@
           </div>
         </div>
         <p class="footer-desc">
-          Advancing the pure, unchanged agape teachings of Yeshua ben Yosef through environmental stewardship, technology rehabilitation, and compassionate community empowerment.
+          Advancing the pure, unchanged agape teachings of Yeshua ben Yosef through environmental stewardship, technology rehabilitation, and compassionate vocational empowerment.
         </p>
       </div>
 
       <div class="footer-col">
-        <h4>Ministries</h4>
+        <h4>Ministries & Guilds</h4>
         <ul class="footer-links">
+          <li><a href="#vocational">Vocational Rehab Guild</a></li>
+          <li><a href="#vocational">Fair-Chance Re-entry Lab</a></li>
+          <li><a href="#pillars">Digital Divide Grants</a></li>
           <li><a href="#mission">Agape Stewardship</a></li>
-          <li><a href="#services">Digital Divide Grants</a></li>
-          <li><a href="#services">Vocational Youth Labs</a></li>
-          <li><a href="#how-it-works">E-Waste Sunday Drives</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Technical Care</h4>
         <ul class="footer-links">
-          <li><a href="#services">NIST 800-88 Standards</a></li>
-          <li><a href="#services">Forensic Data Recovery</a></li>
-          <li><a href="#services">R2v3 Downstream Policy</a></li>
+          <li><a href="#pillars">NIST 800-88 Standards</a></li>
+          <li><a href="#pillars">Forensic Data Recovery</a></li>
+          <li><a href="#pillars">R2v3 Downstream Policy</a></li>
           <li><a href="#request">Chain of Custody</a></li>
         </ul>
       </div>
@@ -1128,7 +1340,7 @@
         <h4>Legal & Contact</h4>
         <ul class="footer-links">
           <li><a href="#">501(c)(3) Status</a></li>
-          <li><a href="#">Privacy Agreement</a></li>
+          <li><a href="#">Re-entry Ministry Partners</a></li>
           <li><a href="#">Volunteer Technicians</a></li>
           <li><a href="#">support@onechurch.global</a></li>
         </ul>
@@ -1137,7 +1349,7 @@
 
     <div class="footer-bottom">
       <div>&copy; 2026 Our New Era (ONE) Church — ONE E-Waste Emporia. All rights reserved.</div>
-      <div>Designed with reverence for our planet and people.</div>
+      <div>Dedicated to the dignity of all people and the renewal of our planet.</div>
     </div>
   </footer>
 
