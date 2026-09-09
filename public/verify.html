@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NIST SP 800-88 Cryptographic Verification — ONE Emporia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(18, 24, 38, 0.9);
+      --border: rgba(255, 255, 255, 0.1);
+      --accent-green: #34d399;
+      --accent-purple: #c084fc;
+      --accent-blue: #38bdf8;
+      --text: #f3f5f9;
+      --muted: #9ba3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-image: 
+        radial-gradient(circle at 50% 10%, rgba(52, 211, 153, 0.15), transparent 45%),
+        radial-gradient(circle at 50% 50%, #080b12 0%, #030407 100%);
+    }
+
+    .container { max-width: 760px; width: 100%; }
+
+    /* Verification Badge Header */
+    .verify-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(52, 211, 153, 0.4);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(52, 211, 153, 0.15);
+      backdrop-filter: blur(14px);
+      text-align: center;
+      position: relative;
+    }
+
+    .shield-icon {
+      width: 76px;
+      height: 76px;
+      background: rgba(52, 211, 153, 0.15);
+      border: 2px solid var(--accent-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      color: var(--accent-green);
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 0 25px rgba(52, 211, 153, 0.3);
+    }
+
+    .status-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .status-sub {
+      color: var(--accent-green);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2rem;
+    }
+
+    /* Verification Details Ledger */
+    .ledger-box {
+      background: rgba(10, 14, 24, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    .ledger-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.88rem;
+    }
+    .ledger-row:last-child { border-bottom: none; }
+    .ledger-lbl { color: var(--muted); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .ledger-val { font-weight: 700; color: #fff; text-align: right; }
+
+    /* Cryptographic Hash Highlight */
+    .hash-card {
+      background: #000;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 10px;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.78rem;
+      color: var(--accent-blue);
+      word-break: break-all;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .statement-box {
+      font-size: 0.86rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+      text-align: left;
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--accent-green);
+      padding: 1rem 1.2rem;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 2rem;
+    }
+
+    .btn-return {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .btn-return:hover { background: rgba(255, 255, 255, 0.15); }
+
+    footer {
+      margin-top: 2.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="verify-card">
+      <div class="shield-icon">&#10004;</div>
+      <h1 class="status-title">Cryptographic Attestation Verified</h1>
+      <div class="status-sub">NIST SP 800-88 Rev. 1 &bull; Permanent Data Sanitization</div>
+
+      <div class="statement-box">
+        <strong>Immutable Zero-Data Guarantee:</strong> This electronic device and all onboard magnetic/solid-state storage sectors have been forensically purged and certified under the physical custody of <strong>ONE E-Waste Emporia & Restorative Guild</strong>. Residual magnetic and flash-memory data has been rendered completely irretrievable.
+      </div>
+
+      <div class="ledger-box">
+        <div class="ledger-row">
+          <span class="ledger-lbl">Attestation ID</span>
+          <span class="ledger-val" id="vCertId">CERT-NIST-7F83B1657F</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-lbl">Work Order & Serial</span>
+          <span class="ledger-val" id="vWorkOrder">WO-8X92A &bull; PF-19283K</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-lbl">Hardware Description</span>
+          <span class="ledger-val" id="vDevice">Lenovo ThinkPad T480 (512GB NVMe)</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-lbl">Sanitization Method</span>
+          <span class="ledger-val" style="color: var(--accent-green);">CRYPTOGRAPHIC_ERASURE_PURGE</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-lbl">Execution Timestamp</span>
+          <span class="ledger-val" id="vTimestamp">September 8, 2026 &bull; 14:12:08 UTC</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-lbl">Technical Authority</span>
+          <span class="ledger-val">Our New Era (ONE) Church Tech Annex</span>
+        </div>
+        <div class="ledger-row">
+          <span class="ledger-lbl">Supervising Engineer</span>
+          <span class="ledger-val">Noah Nemo &bull; Director of Technical Stewardship</span>
+        </div>
+
+        <div style="margin-top: 1rem;">
+          <span class="ledger-lbl">Immutable SHA-256 Checksum Signature:</span>
+          <div class="hash-card" id="vHash">
+            7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 1rem;">
+        <a href="certificate.html" class="btn-return" id="fullDocLink">&larr; View Official Certificate PDF</a>
+        <a href="index.html" class="btn-return">ONE Emporia Home</a>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2026 Our New Era (ONE) Church &bull; Sponsored by the Universal Agape Ministry &bull; 501(c)(3) Non-Profit
+    </footer>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id') || 'WO-8X92A';
+    const hash = params.get('hash') || '7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069';
+
+    document.getElementById('vWorkOrder').innerText = id;
+    document.getElementById('vCertId').innerText = 'CERT-NIST-' + hash.substring(0, 10).toUpperCase();
+    document.getElementById('vHash').innerText = hash;
+    document.getElementById('fullDocLink').href = `certificate.html?id=${id}`;
+  </script>
+</body>
+</html>

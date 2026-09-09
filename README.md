@@ -43,7 +43,8 @@ ONE-Ewaste-Emporia/
 │   ├── passport.html           # NEW: Apprentice skills passport & portfolio transcript
 │   ├── triage-assistant.html   # NEW: Guided diagnostic troubleshooter & teaching decision tree          # NEW: Dedicated volunteer onboarding portal (The 4 W's: How, When, Where, Why)              # Customer landing page & work order wizard
 │   ├── track.html              # NEW: Customer self-service tracking & estimate approval portal
-│   ├── certificate.html        # NEW: Verifiable NIST 800-88 certificate & 501(c)(3) tax receipt
+│   ├── certificate.html        # Verifiable NIST 800-88 certificate & 501(c)(3) tax receipt (with QR code & chassis sticker)
+│   ├── verify.html             # NEW: Public cryptographic attestation ledger & QR scanner destination        # NEW: Verifiable NIST 800-88 certificate & 501(c)(3) tax receipt
 │   ├── admin.html              # Apprentice & supervisor triage workbench UI
 │   ├── terms.html              # Terms of service & $50 diagnostic agreement
 │   ├── privacy.html            # Strict data privacy & user information policy
@@ -142,3 +143,19 @@ Designed around the **How, When, Where, and Why** framework:
    - IT Asset Disposition (ITAD) for companies, schools, and churches retiring 10 to 500+ machines.
    - Free dock-to-dock freight pickup, serialized NIST SP 800-88 sanitization certificates, and 501(c)(3) equipment tax contribution receipts.
    - Interactive Fleet Social Impact & Tax Valuation Calculator (calculates diverted pounds of e-waste, carbon offsets, and apprentice hours funded).
+
+---
+
+## Technical & Operational Hardening
+
+1. **Automated Inbound Parcel Delivery Webhook (`src/server/server.js` & `src/server/notifications.js`):**
+   - Integrates with the **EasyPost / USPS Tracking Webhook** (`POST /api/webhooks/easypost`).
+   - When the postal courier marks the inbound tracking number as `delivered`, the backend automatically updates the work order in the database to `delivered_at_annex`.
+   - Instantly triggers a reassuring **automated SMS and email** to the owner:
+     > *"Your device has arrived safely at ONE Emporia Tech Lab. Diagnostic bench triage will begin within 24 hours."*
+   - Eliminates customer anxiety during transit and logs the timestamp to the chain-of-custody audit log.
+
+2. **Cryptographic Certificate Verification QR Code & Chassis Sticker (`public/certificate.html` & `public/verify.html`):**
+   - **QR Code on Certificates:** Every Certificate of Data Sanitization includes a dynamically generated QR code encoding the immutable verification URL.
+   - **Printable Chassis Sticker Mode:** Technicians can click **"Print Chassis QR Sticker"** to generate a compact 2" x 2" label formatted for direct application to the computer chassis.
+   - **Public Attestation Ledger (`public/verify.html`):** Anyone scanning the QR code on the paper certificate or computer case is taken directly to the cryptographic verification page displaying the SHA-256 hash, NIST SP 800-88 sanitization method, and church supervisor sign-off.
