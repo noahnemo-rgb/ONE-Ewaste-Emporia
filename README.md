@@ -171,3 +171,21 @@ A multi-purpose, floating conversational assistant embedded across all portal pa
 - **Volunteer Onboarding (How/When/Where/Why):** Guides volunteers to the application portal and explains shifts at the church tech annex, community pop-ups, and remote tutoring.
 - **Storefront & Fleet ITAD Inquiries:** Assists customers with laptop purchases and corporate IT directors with fleet decommissioning pickups and 501(c)(3) tax valuations.
 - **Backend API (`POST /api/chat`):** Express REST endpoint with graceful client-side fallback if running in offline static mode.
+
+---
+
+## AI Agape Chatbot Powered by Puter.js (Zero Token Cost)
+
+The embedded AI assistant widget (`public/assets/chatbot.js`) incorporates **Puter.js** (`https://js.puter.com/v2/`):
+- **Zero Token Cost to ONE Church:** All natural language model calls run client-side through Puter.js in the user's browser session. ONE Church incurs **$0.00** in API bills or customer token usage.
+- **Full Ministry Knowledge Base:** Puter's inference engine is initialized with our complete system prompt, covering the $50 diagnostic deposit credit, NIST SP 800-88 data recovery with out-of-band SMS passkeys, pre-shipment photo uploads, returning citizen mentorship, and CompTIA A+ apprentice passports.
+- **Graceful Offline Fallback:** If Puter.js is blocked by a network firewall or ad-blocker, the widget seamlessly falls back to our local client-side knowledge base so users never encounter a broken chat window.
+
+---
+
+## Pre-Shipment Photo Upload & Serial Number Baseline
+
+On the Work Order Wizard (`index.html`):
+- **Serial Number / Service Tag Field:** Explicit capture of hardware serials (e.g. `PF-19283K`) to prevent mix-ups and log custody.
+- **Camera & Photo Upload Zone:** Mobile-friendly direct camera capture and multi-file upload for capturing 1–2 baseline photos before postal shipment.
+- **Physical Condition Flags:** Checkboxes for baseline screen cracks, body scuffs, or known liquid spills, protecting both the customer and the church lab against carrier dispute ambiguity.

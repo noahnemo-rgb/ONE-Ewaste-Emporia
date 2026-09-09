@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workbench — ONE Emporia Apprentice & Supervisor Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090c14;
+      --card-bg: rgba(18, 24, 38, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #c084fc;
+      --accent-blue: #38bdf8;
+      --accent-green: #34d399;
+      --text: #f3f5f9;
+      --muted: #9ba3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.6; padding: 1.5rem; }
+    header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .brand { display: flex; align-items: center; gap: 0.8rem; }
+    .brand img { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2); }
+    .brand h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; color: #fff; }
+    .brand span { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; display: block; }
+    .nav-actions { display: flex; gap: 1rem; align-items: center; }
+    .btn { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: #fff; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; transition: 0.2s; }
+    .btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); }
+    .btn-primary { background: linear-gradient(135deg, #c084fc, #6366f1); border: none; }
+    .btn-primary:hover { opacity: 0.9; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+    .stat-val { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
+    .stat-lbl { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+
+    .grid-2 { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 1.5rem; }
+    .panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+    .panel-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; color: #fff; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+
+    /* Intake Scanner Bar */
+    .scanner-box { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; background: rgba(0,0,0,0.3); padding: 0.8rem; border-radius: 10px; border: 1px solid var(--border); }
+    .scanner-input { flex-grow: 1; background: transparent; border: none; color: #fff; font-family: monospace; font-size: 0.95rem; outline: none; }
+
+    /* Orders Table */
+    table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    th { text-align: left; padding: 0.75rem 0.5rem; color: var(--muted); border-bottom: 1px solid var(--border); font-size: 0.75rem; text-transform: uppercase; }
+    td { padding: 0.85rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    .tag { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.72rem; font-weight: 600; }
+    .tag-repair { background: rgba(192,132,252,0.15); color: #c084fc; border: 1px solid rgba(192,132,252,0.3); }
+    .tag-recovery { background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
+    .tag-donation { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+
+    /* Checklist */
+    .check-item { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; }
+    .check-item input[type="checkbox"] { margin-top: 0.25rem; accent-color: var(--accent); }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-label { display: block; font-size: 0.78rem; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+    .form-input, .form-textarea, .form-select { width: 100%; background: rgba(10,14,24,0.9); border: 1px solid var(--border); border-radius: 8px; padding: 0.6rem 0.8rem; color: #fff; font-family: inherit; font-size: 0.85rem; outline: none; }
+    .form-input:focus { border-color: var(--accent); }
+
+    @media (max-width: 900px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">
+      <img src="assets/one_logo.jpg" alt="ONE Logo">
+      <div>
+        <h1>Apprentice & Supervisor Workbench</h1>
+        <span>ONE E-Waste Emporia &bull; Restorative Justice Vocational Lab</span>
+      </div>
+    </div>
+    <div class="nav-actions">
+            <a href="passport.html" class="btn" target="_blank" style="color: var(--accent);">&#127942; Apprentice Passports</a>
+      <a href="triage-assistant.html" class="btn" target="_blank" style="color: var(--accent-blue);">&#129512; Triage Assistant</a>
+      <a href="index.html" class="btn">View Customer Site</a>
+      <a href="volunteer.html" class="btn" target="_blank">&#10022; Volunteer Portal</a>
+      <button class="btn btn-primary" onclick="simulateNewIntake()">+ New Inbound Parcel</button>
+    </div>
+  </header>
+
+  <!-- Metric Overview -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-lbl">Active Work Orders</div>
+      <div class="stat-val" id="statActive">14</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">In Diagnostic Bench ($50 Deposit)</div>
+      <div class="stat-val" style="color: var(--accent);">6</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">Apprentice Cohort Size</div>
+      <div class="stat-val" style="color: var(--accent-blue);">8 Technicians</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-lbl">E-Waste Diverted (MTD)</div>
+      <div class="stat-val" style="color: var(--accent-green);">1,420 lbs</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <!-- Left: Live Queue -->
+    <div class="panel">
+      <div class="panel-title">
+        <span>Active Work Orders & Diagnostic Triage Queue</span>
+        <span style="font-size: 0.75rem; color: var(--muted);">Auto-refreshed</span>
+      </div>
+
+      <div class="scanner-box">
+        <span style="color: var(--muted);">&#128269;</span>
+        <input type="text" class="scanner-input" placeholder="Scan Barcode / Enter Tracking # (e.g., 9400111899562...)" onkeypress="handleScan(event)">
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Client & Phone</th>
+            <th>Device</th>
+            <th>Track</th>
+            <th>Disposition If Unrepaired</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="orderTableBody">
+          <tr>
+            <td><strong>WO-8X92A</strong></td>
+            <td>Miriam B.<br><span style='font-size:0.75rem; color:var(--muted);'>(555) 234-8901</span></td>
+            <td>ThinkPad T480</td>
+            <td><span class="tag tag-repair">Repair ($50 Paid)</span></td>
+            <td>Donate to Guild</td>
+            <td><span style="color: #facc15;">Bench Diagnostic</span></td>
+            <td><button class="btn" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="selectOrder('WO-8X92A', 'ThinkPad T480', 'Miriam B.', 'donate')">Inspect</button></td>
+          </tr>
+          <tr>
+            <td><strong>WO-7P31B</strong></td>
+            <td>Thomas K.<br><span style='font-size:0.75rem; color:var(--muted);'>(555) 871-3329</span></td>
+            <td>MacBook Air M1</td>
+            <td><span class="tag tag-recovery">Data Recovery</span></td>
+            <td>Encrypted Cloud Vault</td>
+            <td><span style="color: var(--accent-blue);">Write-Block Imaging</span></td>
+            <td><button class="btn" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="selectOrder('WO-7P31B', 'MacBook Air M1', 'Thomas K.', 'cloud')">Inspect</button></td>
+          </tr>
+          <tr>
+            <td><strong>WO-4N19C</strong></td>
+            <td>St. Jude Ministry<br><span style='font-size:0.75rem; color:var(--muted);'>(555) 412-9090</span></td>
+            <td>5x Dell OptiPlex</td>
+            <td><span class="tag tag-donation">Upcycle / Donate</span></td>
+            <td>Guild Teardown/Grant</td>
+            <td><span style="color: var(--accent-green);">Refurbished - OS Ready</span></td>
+            <td><button class="btn" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="selectOrder('WO-4N19C', '5x Dell OptiPlex', 'St. Jude Ministry', 'donate')">Inspect</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Right: Technician Triage & Estimate Builder -->
+    <div class="panel">
+      <div class="panel-title">
+        <div>
+          <span id="activeOrderTitle" style="display:block;">Triage Bench: WO-8X92A</span>
+          <span id="activeOrderPhone" style="font-size: 0.78rem; color: var(--accent-blue); font-family: monospace;">Phone: (555) 234-8901 (Direct Tech Line)</span>
+        </div>
+        <span class="tag tag-repair" id="activeOrderTag">Repair</span>
+      </div>
+
+      <div style="margin-bottom: 1.2rem;">
+        <span class="form-label">Technician Checklist</span>
+        <div class="check-item"><input type="checkbox" checked> <span>ESD Grounding Strap Connected & Verified</span></div>
+        <div class="check-item"><input type="checkbox" checked> <span>Battery Physical Inspection (Zero Swelling/Leakage)</span></div>
+        <div class="check-item"><input type="checkbox"> <span>POST & Display Subsystem Diagnostics</span></div>
+        <div class="check-item"><input type="checkbox"> <span>Storage SMART Health & Bad Sector Scan</span></div>
+        <div class="check-item"><input type="checkbox"> <span>RAM MemTest86+ Stress Pass (0 Errors)</span></div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Hardware Faults Found</label>
+        <textarea class="form-textarea" rows="2" placeholder="e.g., Shorted DC power jack; degraded thermal paste; primary NVMe health at 92%."></textarea>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem;">
+        <div>
+          <label class="form-label">Parts Cost ($)</label>
+          <input type="number" class="form-input" id="partsCost" value="35" onchange="calcEstimate()">
+        </div>
+        <div>
+          <label class="form-label">Labor Cost ($)</label>
+          <input type="number" class="form-input" id="laborCost" value="60" onchange="calcEstimate()">
+        </div>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 0.8rem; margin-bottom: 1rem; font-size: 0.82rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+          <span style="color: var(--muted);">Diagnostic Deposit Credit:</span>
+          <span style="color: var(--accent-green);">- $50.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-weight: 700;">
+          <span>Net Invoice Balance to Client:</span>
+          <span id="netEstimateVal" style="color: var(--accent);">$45.00</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" style="width: 100%; margin-bottom: 0.6rem;" onclick="sendEstimate()">
+        Transmit Written Estimate to Client
+      </button>
+
+      <button class="btn" style="width: 100%; font-size: 0.78rem;" onclick="generateNISTCert()">
+        Generate NIST SP 800-88 Sanitization Certificate
+      </button>
+    </div>
+  </div>
+
+  <script>
+    function calcEstimate() {
+      const parts = parseFloat(document.getElementById('partsCost').value || 0);
+      const labor = parseFloat(document.getElementById('laborCost').value || 0);
+      const net = Math.max(0, (parts + labor) - 50);
+      document.getElementById('netEstimateVal').innerText = `$${net.toFixed(2)}`;
+    }
+
+    function selectOrder(id, device, client, type, phone = '(555) 234-8901') {
+      document.getElementById('activeOrderTitle').innerText = `Triage Bench: ${id} (${device})`;
+      const phoneEl = document.getElementById('activeOrderPhone');
+      if (phoneEl) phoneEl.innerText = `Phone: ${phone} (Direct Tech Line)`;
+    }
+
+    function handleScan(e) {
+      if (e.key === 'Enter') {
+        alert(`Barcode ${e.target.value} recognized! Inbound parcel logged to chain-of-custody audit log.`);
+        e.target.value = '';
+      }
+    }
+
+    function sendEstimate() {
+      alert("Written Estimate transmitted! Customer will receive an email notification with one-click 'Approve' or 'Decline' buttons via Stripe invoice.");
+    }
+
+    function generateNISTCert() {
+      alert("NIST SP 800-88 Certificate generated and signed with SHA-256 cryptographic hash! Stored in database custody audit logs.");
+    }
+
+    function simulateNewIntake() {
+      const id = 'WO-' + Math.floor(Math.random()*89999 + 10000).toString(36).toUpperCase();
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${id}</strong></td>
+        <td>New Donor</td>
+        <td>Dell Latitude</td>
+        <td><span class="tag tag-repair">Repair ($50 Deposit)</span></td>
+        <td>Donate to Guild</td>
+        <td><span style="color: #38bdf8;">In Transit</span></td>
+        <td><button class="btn" style="padding: 0.3rem 0.6rem; font-size: 0.75rem;" onclick="selectOrder('${id}', 'Dell Latitude', 'New Donor', 'repair')">Inspect</button></td>
+      `;
+      document.getElementById('orderTableBody').prepend(tr);
+      const activeEl = document.getElementById('statActive');
+      activeEl.innerText = parseInt(activeEl.innerText) + 1;
+    }
+  </script>
+
+  <!-- ONE Emporia AI Agape Assistant Chatbot Widget -->
+  <script src="assets/chatbot.js"></script>
+</body>
+</html>

@@ -431,6 +431,10 @@
         <li><a href="#mission">Agape Mission</a></li>
         <li><a href="#repairs">Diagnostics & Repairs</a></li>
         <li><a href="#workorder">Submit Work Order</a></li>
+        <li><a href="track.html" style="color: #c084fc; font-weight: 600;">Track Order</a></li>
+        <li><a href="store.html" style="color: #38bdf8; font-weight: 600;">Storefront</a></li>
+        <li><a href="enterprise.html">Fleet ITAD</a></li>
+        <li><a href="volunteer.html">Volunteer Guild</a></li>
         <li><a href="terms.html">Terms of Service</a></li>
         <li><a href="privacy.html">Privacy</a></li>
       </ul>
@@ -528,7 +532,7 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label">Device Type & Description</label>
+              <label class="form-label">Device Type, Model & Serial Number</label>
               <select class="form-select" id="deviceType" style="margin-bottom: 0.6rem;" required>
                 <option value="laptop">Laptop / MacBook</option>
                 <option value="desktop">Desktop PC / Mac Mini / Tower</option>
@@ -536,7 +540,43 @@
                 <option value="drive">Internal/External Hard Drive or SSD</option>
                 <option value="mixed">Mixed Lot / Multiple Devices</option>
               </select>
-              <input type="text" class="form-input" id="deviceModel" placeholder="Brand & Model (e.g., ThinkPad T480, Dell XPS 15, iPhone 12)" required>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-bottom: 0.6rem;">
+                <input type="text" class="form-input" id="deviceModel" placeholder="Brand & Model (e.g. ThinkPad T480)" required>
+                <input type="text" class="form-input" id="deviceSerial" placeholder="Serial Number / Service Tag (e.g. PF-19283K)">
+              </div>
+              <span style="font-size: 0.72rem; color: var(--text-dim); display: block; margin-top: -0.2rem; margin-bottom: 0.5rem;">
+                Serial # is usually found on the bottom case sticker, battery bay, or system BIOS.
+              </span>
+            </div>
+
+            <!-- Pre-Shipment Photo Upload & Baseline Physical Condition Capture -->
+            <div class="form-group">
+              <label class="form-label">Pre-Shipment Photos & Physical Condition (Recommended)</label>
+              <span style="font-size: 0.75rem; color: var(--text-dim); display: block; margin-bottom: 0.5rem;">
+                Snap 1–2 photos of your device (front display and back label). Establishes physical baseline condition before postal transit and assists our apprentices in staging replacement parts.
+              </span>
+
+              <div style="border: 2px dashed rgba(192, 132, 252, 0.4); border-radius: 12px; padding: 1.2rem; text-align: center; background: rgba(0,0,0,0.25); cursor: pointer;" onclick="document.getElementById('photoInput').click()">
+                <div style="font-size: 1.8rem; margin-bottom: 0.3rem;">&#128248;</div>
+                <strong style="color: #fff; font-size: 0.88rem; display: block;">Click to Snap or Upload Photos</strong>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">Supports smartphone camera direct capture, JPG, PNG, WEBP</span>
+                <input type="file" id="photoInput" accept="image/*" capture="environment" multiple style="display: none;" onchange="handlePhotoUpload(event)">
+              </div>
+
+              <!-- Thumbnails Preview Row -->
+              <div id="photoPreviewGrid" style="display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 0.8rem;"></div>
+
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; font-size: 0.78rem; color: #cbd5e1;">
+                <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                  <input type="checkbox" id="condScratches" style="accent-color: #c084fc;"> Minor body scratches
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                  <input type="checkbox" id="condScreenCrack" style="accent-color: #c084fc;"> Cracked display/glass
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                  <input type="checkbox" id="condLiquid" style="accent-color: #c084fc;"> Known liquid spill
+                </label>
+              </div>
             </div>
 
             <div class="form-group">
@@ -617,6 +657,10 @@
                 <input type="text" class="form-input" id="clientName" placeholder="Full Name" required>
                 <input type="email" class="form-input" id="clientEmail" placeholder="Email Address" required>
               </div>
+              <div style="margin-bottom: 0.6rem;">
+                <input type="tel" class="form-input" id="clientPhone" placeholder="Phone Number (for technician diagnostics, estimate updates & data passkeys)" required>
+                <span style="font-size: 0.72rem; color: var(--text-dim); display: block; margin-top: 0.25rem;">Used by apprentice technicians and lab supervisors if clarification is needed regarding your hardware or data recovery.</span>
+              </div>
               <input type="text" class="form-input" id="clientAddress" placeholder="Street Address, City, State, ZIP" required>
             </div>
 
@@ -689,7 +733,11 @@
         <h4>Services & Guilds</h4>
         <ul class="footer-links">
           <li><a href="#repairs">Diagnostic & Repairs</a></li>
+          <li><a href="track.html">Order Tracking Portal</a></li>
+          <li><a href="store.html">Upcycled Hardware Store</a></li>
+          <li><a href="enterprise.html">Fleet Decommissioning</a></li>
           <li><a href="#workorder">Vocational Rehab Guild</a></li>
+          <li><a href="volunteer.html">Volunteer Onboarding (How/When/Where/Why)</a></li>
           <li><a href="#workorder">Data Sanctuary & Recovery</a></li>
           <li><a href="#workorder">Sacred Earth Recycling</a></li>
         </ul>
@@ -775,7 +823,38 @@
       }
     }
 
-    async function handleOrderSubmit(e) {
+    async 
+    let uploadedPhotos = [];
+
+    function handlePhotoUpload(e) {
+      const files = Array.from(e.target.files);
+      const previewGrid = document.getElementById('photoPreviewGrid');
+
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const b64 = evt.target.result;
+          uploadedPhotos.push({ name: file.name, data: b64 });
+
+          const thumb = document.createElement('div');
+          thumb.style.position = 'relative';
+          thumb.style.width = '80px';
+          thumb.style.height = '80px';
+          thumb.style.borderRadius = '8px';
+          thumb.style.overflow = 'hidden';
+          thumb.style.border = '1px solid rgba(192, 132, 252, 0.5)';
+
+          thumb.innerHTML = `
+            <img src="${b64}" style="width:100%; height:100%; object-fit: cover;">
+            <button type="button" onclick="this.parentElement.remove()" style="position: absolute; top:2px; right:2px; background: rgba(0,0,0,0.7); color:#fff; border:none; border-radius:50%; width:18px; height:18px; cursor:pointer; font-size:10px; line-height:18px; text-align:center; padding:0;">✕</button>
+          `;
+          previewGrid.appendChild(thumb);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function handleOrderSubmit(e) {
       e.preventDefault();
       const submitBtn = document.getElementById('submitBtn');
       submitBtn.innerText = "Connecting to Stripe...";
@@ -784,6 +863,7 @@
       const payload = {
         fullName: document.getElementById('clientName').value,
         email: document.getElementById('clientEmail').value,
+        phone: document.getElementById('clientPhone').value,
         address: document.getElementById('clientAddress').value,
         serviceType: document.getElementById('serviceType').value,
         deviceType: document.getElementById('deviceType').value,
@@ -814,5 +894,8 @@
       }
     }
   </script>
+
+  <!-- ONE Emporia AI Agape Assistant Chatbot Widget -->
+  <script src="assets/chatbot.js"></script>
 </body>
 </html>
