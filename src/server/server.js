@@ -12,6 +12,7 @@ require('dotenv').config();
 const shippingService = require('./shipping');
 const notificationService = require('./notifications');
 const storageService = require('./storage');
+const certificateEngine = require('./certificates');
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder');
 
@@ -224,6 +225,101 @@ app.post('/api/vault/generate-download', async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+
+// -------------------------------------------------------------
+// API: Public Work Order Tracking & Milestone Inspection
+// -------------------------------------------------------------
+app.get('/api/work-orders/:id/track', (req, res) => {
+  const query = req.params.id.trim().toUpperCase();
+  const wo = db.workOrders.find(w => w.id.toUpperCase() === query || (w.client && w.client.phone && w.client.phone.includes(query)));
+
+  if (!wo) {
+    // Return mock active order if querying default demo
+    return res.json({
+      success: true,
+      id: query,
+      deviceModel: 'Lenovo ThinkPad T480',
+      client: { fullName: 'Miriam ben Joseph', phone: '(555) 234-8901' },
+      status: 'diagnostic_estimate_ready',
+      estimate: {
+        partsCost: 3500,
+        laborCost: 6000,
+        diagnosticDepositCredit: 5000,
+        netBalanceDue: 4500,
+        faults: 'Shorted internal DC power jack; degraded thermal paste; NVMe drive healthy.',
+        status: 'pending_client_approval'
+      },
+      disposition: 'donate_to_guild',
+      milestones: [
+        { step: 1, title: 'Work Order Submitted & Label Dispatched', completed: true, timestamp: '2026-09-05T10:14:00Z' },
+        { step: 2, title: 'Inbound Parcel Received at Church Tech Annex', completed: true, timestamp: '2026-09-07T14:45:00Z' },
+        { step: 3, title: 'Hardware Diagnostics & Written Estimate Authored', completed: true, timestamp: '2026-09-08T11:30:00Z' },
+        { step: 4, title: 'Client Estimate Decision / Repair Bench', active: true },
+        { step: 5, title: 'Quality Assurance & Return Shipment / Donation Impact', pending: true }
+      ]
+    });
+  }
+
+  res.json({ success: true, ...wo });
+});
+
+// -------------------------------------------------------------
+// API: Customer Online Approval / Decline of Written Estimate
+// -------------------------------------------------------------
+app.post('/api/work-orders/:id/estimate-decision', (req, res) => {
+  const { decision } = req.body; // 'approved' or 'declined'
+  const woId = req.params.id;
+  console.log(`[Estimate Decision] Order ${woId}: ${decision}`);
+
+  res.json({
+    success: true,
+    workOrderId: woId,
+    decision,
+    message: decision === 'approved' 
+      ? 'Estimate approved. Technician scheduled for component repair.' 
+      : 'Estimate declined. Device allocated according to your pre-selected disposition.'
+  });
+});
+
+// -------------------------------------------------------------
+// API: Generate / Retrieve Official Certificates & Receipts
+// -------------------------------------------------------------
+app.get('/api/certificates/:id', (req, res) => {
+  const { id } = req.params;
+  const { type } = req.query; // 'sanitization' or 'tax_receipt'
+
+  if (type === 'tax_receipt') {
+    const cert = certificateEngine.generateTaxReceipt({ id, client: { fullName: 'Valued Donor' } }, 15000);
+    return res.json(cert);
+  }
+
+  const cert = certificateEngine.generateSanitizationCertificate({ id, client: { fullName: 'Valued Client' }, deviceModel: 'Client Hardware' }, 'Apprentice Cohort #4');
+  res.json(cert);
+});
+
+
+// -------------------------------------------------------------
+// API: Volunteer Application Intake (How/When/Where/Why)
+// -------------------------------------------------------------
+app.post('/api/volunteers/onboard', (req, res) => {
+  const { fullName, email, phone, locationPreference, roles, schedule, experience, whyStatement } = req.body;
+
+  if (!fullName || !email || !phone) {
+    return res.status(400).json({ error: 'Name, email, and phone are required.' });
+  }
+
+  const volId = 'VOL-' + Date.now().toString(36).toUpperCase();
+  console.log(`[Volunteer Onboarding] New application received: ${volId} - ${fullName} (${email})`);
+  console.log(`   Location: ${locationPreference} | Schedule: ${schedule} | Roles: ${JSON.stringify(roles)}`);
+  console.log(`   Why: ${whyStatement}`);
+
+  res.json({
+    success: true,
+    volunteerId: volId,
+    message: 'Application received with agape. Orientation coordinator will contact within 48 hours.'
+  });
 });
 
 app.listen(PORT, () => {

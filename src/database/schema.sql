@@ -108,3 +108,20 @@ CREATE TABLE IF NOT EXISTS custody_audit_logs (
 CREATE INDEX IF NOT EXISTS idx_wo_user ON work_orders(user_id);
 CREATE INDEX IF NOT EXISTS idx_wo_status ON work_orders(status);
 CREATE INDEX IF NOT EXISTS idx_tx_wo ON transactions(work_order_id);
+
+-- 6. Volunteer Guild Applications & Onboarding Table
+CREATE TABLE IF NOT EXISTS volunteers (
+    id VARCHAR(64) PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone VARCHAR(50) NOT NULL,
+    location_preference VARCHAR(50) NOT NULL,  -- 'annex', 'popups', 'remote', 'hybrid'
+    roles_interested TEXT NOT NULL,            -- JSON array of selected roles
+    schedule_availability VARCHAR(50) NOT NULL,-- 'weekdays_mornings', 'wednesday_evenings', 'saturday_drives', etc.
+    experience_level VARCHAR(50) NOT NULL,     -- 'beginner', 'hobbyist', 'professional', 'mentor_only'
+    why_statement TEXT NOT NULL,
+    agreed_to_code_of_ethics BOOLEAN DEFAULT TRUE,
+    orientation_status VARCHAR(50) DEFAULT 'applied', -- 'applied', 'orientation_scheduled', 'active_guild_member'
+    assigned_station VARCHAR(100),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);

@@ -36,22 +36,26 @@
 ```
 ONE-Ewaste-Emporia/
 ├── public/
-│   ├── index.html              # Main interactive landing page & work order wizard
-│   ├── admin.html              # Apprentice & Supervisor Triage Workbench UI
-│   ├── terms.html              # Terms of Service & Diagnostic Repair Agreement
-│   ├── privacy.html            # Privacy Policy & User Data Handling
-│   ├── cookies.html            # Cookie Policy
+│   ├── index.html
+│   ├── volunteer.html          # NEW: Dedicated volunteer onboarding portal (The 4 W's: How, When, Where, Why)              # Customer landing page & work order wizard
+│   ├── track.html              # NEW: Customer self-service tracking & estimate approval portal
+│   ├── certificate.html        # NEW: Verifiable NIST 800-88 certificate & 501(c)(3) tax receipt
+│   ├── admin.html              # Apprentice & supervisor triage workbench UI
+│   ├── terms.html              # Terms of service & $50 diagnostic agreement
+│   ├── privacy.html            # Strict data privacy & user information policy
+│   ├── cookies.html            # Minimalist cookie policy
 │   └── assets/
-│       └── one_logo.jpg        # ONE Church liquid glass emblem
+│       └── one_logo.jpg        # Liquid glass ONE Church emblem
 ├── src/
 │   ├── server/
-│   │   ├── server.js           # Express API, Stripe Checkout & Webhook handler
+│   │   ├── server.js           # Express API, Stripe checkout & webhook handler
+│   │   ├── certificates.js     # NEW: NIST 800-88 & 501(c)(3) certificate engine
 │   │   ├── shipping.js         # EasyPost / USPS automated return label service
 │   │   ├── notifications.js    # Resend email & Twilio out-of-band SMS service
-│   │   └── storage.js          # Encrypted Cloud Vault pre-signed URL generator
+│   │   └── storage.js          # Encrypted cloud vault pre-signed URL generator
 │   └── database/
-│       ├── schema.sql          # SQL Schema (PostgreSQL / SQLite)
-│       └── schema.prisma       # Prisma ORM Schema
+│       ├── schema.sql          # SQL schema (PostgreSQL / SQLite)
+│       └── schema.prisma       # Prisma ORM schema
 ├── .env.example                # Configuration template
 ├── package.json                # Node.js dependencies & scripts
 ├── STRIPE_SETUP.md             # Stripe merchant account activation walkthrough
@@ -93,3 +97,14 @@ npm start
 ---
 
 &copy; 2026 Our New Era (ONE) Church. All rights reserved.
+
+
+---
+
+## The Volunteer Guild Portal (`public/volunteer.html`)
+
+Designed around the **How, When, Where, and Why** framework:
+- **WHY:** Grounded in universal agape, restorative justice for returning citizens, empowerment of disabled technicians, and zero-landfill stewardship.
+- **HOW:** Structured onboarding tracks (Hardware Diagnostics, Linux/Software, Mentorship/Life Coaching, Logistics/Sorting).
+- **WHEN:** Flexible shifts including Tuesday/Thursday Morning Guild, Wednesday Evening Fellowship & Solder Lab, and 1st/3rd E-Waste Saturday Community Drives.
+- **WHERE:** Tech Sanctuary Annex (Atlanta, GA), Regional Drop-off Satellites, and Remote Virtual Lab.

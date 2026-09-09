@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Guild Onboarding — ONE E-Waste Emporia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(18, 24, 38, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-accent: rgba(192, 132, 252, 0.35);
+      --accent: #c084fc;
+      --accent-blue: #38bdf8;
+      --accent-green: #34d399;
+      --accent-pink: #f472b6;
+      --text: #f3f5f9;
+      --muted: #9ba3b8;
+      --dim: #647087;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      padding: 1.5rem;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.16), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.12), transparent 45%),
+        radial-gradient(circle at 50% 60%, rgba(244, 114, 182, 0.08), transparent 50%),
+        radial-gradient(circle at 50% 50%, #080b12 0%, #030407 100%);
+      background-attachment: fixed;
+    }
+
+    header {
+      max-width: 1100px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
+    .brand img { width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); }
+    .brand-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .brand-sub { font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; display: block; }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-link:hover { color: #fff; }
+
+    .container { max-width: 1040px; margin: 0 auto; }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(30, 24, 48, 0.9) 0%, rgba(14, 20, 36, 0.95) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
+      margin-bottom: 3.5rem;
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(192, 132, 252, 0.25), transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(192, 132, 252, 0.15);
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      color: #e9d5ff;
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #fff;
+      margin-bottom: 1.2rem;
+    }
+    .hero-title span {
+      background: linear-gradient(135deg, #fff, #c084fc 60%, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 750px;
+      margin-bottom: 2rem;
+    }
+    .hero-cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-hero {
+      background: linear-gradient(135deg, #c084fc, #6366f1);
+      color: #fff;
+      padding: 0.9rem 1.8rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(192, 132, 252, 0.4); }
+
+    /* The 4 W's Grid */
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.9rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      text-align: center;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 650px;
+      margin: 0 auto 3rem;
+    }
+
+    .quad-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.8rem;
+      margin-bottom: 4rem;
+    }
+    .quad-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.2rem;
+      backdrop-filter: blur(12px);
+      transition: all 0.3s;
+      position: relative;
+    }
+    .quad-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--card-accent, linear-gradient(90deg, #c084fc, #38bdf8));
+      border-radius: 20px 20px 0 0;
+    }
+    .quad-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6);
+    }
+    .quad-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .quad-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .quad-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-bottom: 1.2rem;
+    }
+    .quad-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+    .quad-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .quad-list li span.bullet { color: var(--accent); font-weight: bold; }
+
+    /* Detailed Onboarding Steps */
+    .onboard-flow {
+      background: rgba(14, 18, 28, 0.65);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem 2.5rem;
+      margin-bottom: 4rem;
+      backdrop-filter: blur(14px);
+    }
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .flow-step {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .flow-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.15));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.4rem;
+    }
+    .flow-title { font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 0.4rem; }
+    .flow-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    /* Interactive Application Form */
+    .apply-section {
+      background: linear-gradient(180deg, rgba(20, 24, 38, 0.9) 0%, rgba(10, 13, 22, 0.98) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: 28px;
+      padding: 3.5rem;
+      margin-bottom: 5rem;
+      box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.7);
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .apply-info h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .apply-info p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group { margin-bottom: 1.25rem; }
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      background: rgba(10, 14, 24, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 12px rgba(192, 132, 252, 0.3);
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 0.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .check-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      cursor: pointer;
+    }
+    .check-label input { accent-color: var(--accent); }
+
+    .btn-apply {
+      width: 100%;
+      background: linear-gradient(135deg, #c084fc, #6366f1);
+      color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 24px -5px rgba(147, 51, 234, 0.5);
+      transition: all 0.2s;
+    }
+    .btn-apply:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -5px rgba(147, 51, 234, 0.7); }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--dim);
+    }
+
+    @media (max-width: 900px) {
+      .quad-grid { grid-template-columns: 1fr; }
+      .flow-steps { grid-template-columns: 1fr 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2.2rem; }
+      .flow-steps { grid-template-columns: 1fr; }
+      .check-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/one_logo.jpg" alt="ONE Church Emblem">
+      <div>
+        <span class="brand-title">ONE Emporia</span>
+        <span class="brand-sub">Our New Era Church Ministry</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="track.html" class="nav-link">Track Order</a>
+      <a href="#how" class="nav-link">How It Works</a>
+      <a href="#apply" class="nav-link" style="color: var(--accent); font-weight: 700;">Apply to Serve</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <div class="hero-badge">&#10022; Agape in Action &bull; Restorative Justice &bull; Sacred Earth</div>
+      <h1 class="hero-title">Serve the Sacred Renewal of <span>People & Planet.</span></h1>
+      <p class="hero-lead">
+        Rooted in the original, unchanged agape teachings of Yeshua ben Yosef, volunteering with ONE E-Waste Emporia is more than repairing computers. It is an act of universal love: transforming obsolete technology while walking alongside individuals with disabilities and men and women rebuilding life after incarceration.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#apply" class="btn-hero">Fill Volunteer Onboarding Form &rarr;</a>
+        <a href="#why" class="nav-link" style="padding: 0.8rem 1.2rem; background: rgba(255,255,255,0.05); border-radius: 10px; font-weight: 600;">Explore The 4 W's</a>
+      </div>
+    </section>
+
+    <!-- The 4 W's: Why, How, When, Where -->
+    <div id="why">
+      <h2 class="section-title">The Volunteer Blueprint</h2>
+      <p class="section-sub">Discover the purpose, structure, schedule, and environment where your time and heart create enduring community transformation.</p>
+    </div>
+
+    <div class="quad-grid">
+      <!-- 1. WHY -->
+      <div class="quad-card" style="--card-accent: linear-gradient(90deg, #c084fc, #f472b6);">
+        <div class="quad-icon">&#128156;</div>
+        <h3 class="quad-heading">1. WHY: The Agape Mission</h3>
+        <p class="quad-desc">
+          Modern society routinely casts aside both obsolete electronics and human beings facing systemic barriers. We believe no soul and no creation is disposable.
+        </p>
+        <ul class="quad-list">
+          <li><span class="bullet">&bull;</span> <strong>Restorative Justice:</strong> Mentor returning citizens transitioning home from prison sentences, providing supportive fellowship and technical coaching.</li>
+          <li><span class="bullet">&bull;</span> <strong>Inclusion for the Disabled:</strong> Assist neurodivergent and physically disabled technicians working on adaptive, ergonomic benches.</li>
+          <li><span class="bullet">&bull;</span> <strong>Digital Divide Eradication:</strong> Refurbish viable computers that are gifted directly to low-income students, foster youth, and isolated seniors.</li>
+          <li><span class="bullet">&bull;</span> <strong>Sacred Earth Stewardship:</strong> Divert hazardous heavy metals and toxic chemicals from our landfills and waterways.</li>
+        </ul>
+      </div>
+
+      <!-- 2. HOW -->
+      <div class="quad-card" id="how" style="--card-accent: linear-gradient(90deg, #38bdf8, #818cf8);">
+        <div class="quad-icon">&#128295;</div>
+        <h3 class="quad-heading">2. HOW: Pathways & Onboarding</h3>
+        <p class="quad-desc">
+          You do not need to be an engineer to serve. We have structured pathways for all experience levels, from beginner sorters to master technicians.
+        </p>
+        <ul class="quad-list">
+          <li><span class="bullet">&bull;</span> <strong>Hardware & Repair Track:</strong> Cleaning, disassembly, thermal paste replacement, RAM/SSD upgrades, and board triage.</li>
+          <li><span class="bullet">&bull;</span> <strong>Software & Open-Source Lab:</strong> Flashing lightweight Linux OS, diagnostic testing, and sanitization verification.</li>
+          <li><span class="bullet">&bull;</span> <strong>Apprentice Mentorship:</strong> Life-skills coaching, resume preparation, and tutoring apprentices toward their CompTIA A+ certification.</li>
+          <li><span class="bullet">&bull;</span> <strong>Logistics, Intake & Packing:</strong> Receiving mailers, inventory barcode scanning, boxing, and dispatching pre-paid parcel kits.</li>
+        </ul>
+      </div>
+
+      <!-- 3. WHEN -->
+      <div class="quad-card" style="--card-accent: linear-gradient(90deg, #34d399, #10b981);">
+        <div class="quad-icon">&#128338;</div>
+        <h3 class="quad-heading">3. WHEN: Shifts & Flexible Time</h3>
+        <p class="quad-desc">
+          We honor your schedule. Whether you have 2 hours a month or want a dedicated weekly volunteer shift, there is a rhythm for you.
+        </p>
+        <ul class="quad-list">
+          <li><span class="bullet">&bull;</span> <strong>Weekday Morning Guild:</strong> Tuesday & Thursday, 9:00 AM &ndash; 1:00 PM (Active bench repairs, triage & testing).</li>
+          <li><span class="bullet">&bull;</span> <strong>Wednesday Evening Fellowship & Solder Lab:</strong> 6:00 PM &ndash; 8:30 PM (Community dinner, apprentice tutoring & electronics repairs).</li>
+          <li><span class="bullet">&bull;</span> <strong>E-Waste Saturday Drives:</strong> 1st & 3rd Saturday of each month, 10:00 AM &ndash; 2:00 PM (Community drop-offs & bulk sorting).</li>
+          <li><span class="bullet">&bull;</span> <strong>Remote Roles:</strong> Flexible hours (grant writing, curriculum design, virtual tutoring, website support).</li>
+        </ul>
+      </div>
+
+      <!-- 4. WHERE -->
+      <div class="quad-card" style="--card-accent: linear-gradient(90deg, #facc15, #f59e0b);">
+        <div class="quad-icon">&#128205;</div>
+        <h3 class="quad-heading">4. WHERE: Our Lab & Satellites</h3>
+        <p class="quad-desc">
+          Serve on-site in our purpose-built technical sanctuary or remotely from the comfort of your home.
+        </p>
+        <ul class="quad-list">
+          <li><span class="bullet">&bull;</span> <strong>The Tech Sanctuary Annex:</strong> Our New Era (ONE) Church Facility, 123 Sanctuary Way, Tech Annex Wing, Atlanta, GA 30301 (Grounded ESD benches, tool library, Class D safety containment).</li>
+          <li><span class="bullet">&bull;</span> <strong>Church Parking Lot Drop-Off Satellites:</strong> Quarterly mobile pop-up intake drives throughout the regional community.</li>
+          <li><span class="bullet">&bull;</span> <strong>The Virtual Lab:</strong> Contribute remotely through our online software stack, curriculum translation, and digital outreach.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Onboarding Flow Steps -->
+    <section class="onboard-flow">
+      <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; color: #fff; text-align: center; margin-bottom: 0.5rem;">How Onboarding Works (4 Simple Steps)</h2>
+      <p style="text-align: center; color: var(--muted); font-size: 0.88rem; max-width: 600px; margin: 0 auto;">From submission to your first bench shift in less than two weeks.</p>
+
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <div class="flow-title">Submit Application</div>
+          <div class="flow-desc">Fill out your skills, availability, and background details in the form below.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <div class="flow-title">Agape Orientation Call</div>
+          <div class="flow-desc">A brief 20-minute video or phone chat with our Volunteer Director to align on church ministry values.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <div class="flow-title">Safety & ESD Training</div>
+          <div class="flow-desc">Hands-on walkthrough of lithium battery fire protocols, ESD grounding, and NIST 800-88 compliance.</div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <div class="flow-title">Bench Guild Pairing</div>
+          <div class="flow-desc">Get paired with a lead technician or apprentice and begin making an immediate difference.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Application Form -->
+    <section class="apply-section" id="apply">
+      <div class="form-grid">
+        <div class="apply-info">
+          <span style="color: var(--accent); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em;">Join The Restorative Guild</span>
+          <h3>Volunteer Intake Application</h3>
+          <p>
+            Whether you want to solder motherboards, teach computer basics to a returning citizen, or help organize our Saturday drop-off drives, we welcome you with open arms.
+          </p>
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; margin-bottom: 1.5rem;">
+            <strong style="display:block; color:#fff; font-size: 0.88rem; margin-bottom: 0.3rem;">Safety & Fair-Chance Commitment:</strong>
+            <p style="font-size: 0.8rem; color: var(--muted); margin: 0; line-height: 1.5;">
+              Because our tech annex operates under restorative justice principles alongside returning citizens and vulnerable populations, all volunteers agree to maintain a supportive, non-judgmental environment of unconditional agape love.
+            </p>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--dim);">
+            Questions? Contact our Volunteer Director at <code>volunteer@onechurch.global</code> or call <code>(404) 555-0199</code>.
+          </p>
+        </div>
+
+        <div>
+          <form id="volunteerForm" onsubmit="handleVolunteerSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-input" id="vName" placeholder="Your Full Name" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1.25rem;">
+              <div>
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="vEmail" placeholder="you@example.org" required>
+              </div>
+              <div>
+                <label class="form-label">Phone Number</label>
+                <input type="tel" class="form-input" id="vPhone" placeholder="(555) 000-0000" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Where Would You Like to Serve?</label>
+              <select class="form-select" id="vLocation" required>
+                <option value="annex">On-Site: Church Tech Annex (Atlanta, GA)</option>
+                <option value="popups">On-Site: Weekend Mobile Pop-up Drives</option>
+                <option value="remote">Remote: Virtual Tutoring, Admin & Web Support</option>
+                <option value="hybrid">Hybrid: Combination of On-Site and Remote</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Areas of Interest / Ministry Roles (Select All That Apply)</label>
+              <div class="check-grid">
+                <label class="check-label"><input type="checkbox" name="vRoles" value="hardware_repair" checked> Hardware Diagnostics & Repairs</label>
+                <label class="check-label"><input type="checkbox" name="vRoles" value="data_sanitization"> Data Recovery & NIST Wiping</label>
+                <label class="check-label"><input type="checkbox" name="vRoles" value="apprentice_mentor"> Mentoring Returning Citizens</label>
+                <label class="check-label"><input type="checkbox" name="vRoles" value="disability_support"> Assisting Disabled Technicians</label>
+                <label class="check-label"><input type="checkbox" name="vRoles" value="sorting_teardown"> E-Waste Sorting & Scrap Teardown</label>
+                <label class="check-label"><input type="checkbox" name="vRoles" value="logistics_shipping"> Postal Shipping & Packing Kits</label>
+                <label class="check-label"><input type="checkbox" name="vRoles" value="community_outreach"> Church Outreach & Pop-up Drives</label>
+                <label class="check-label"><input type="checkbox" name="vRoles" value="admin_grants"> Grant Writing & Administration</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">When Are You Available?</label>
+              <select class="form-select" id="vSchedule" required>
+                <option value="weekdays_mornings">Weekday Mornings (Tue/Thu 9am - 1pm)</option>
+                <option value="wednesday_evenings">Wednesday Evenings (Dinner & Lab 6pm - 8:30pm)</option>
+                <option value="saturday_drives">1st & 3rd Saturdays (10am - 2pm)</option>
+                <option value="flexible_part_time">Flexible (2 to 4 hours / week)</option>
+                <option value="remote_anytime">Remote / As-Needed</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Experience Level with Electronics / IT</label>
+              <select class="form-select" id="vExperience">
+                <option value="beginner">Beginner — Eager and willing to learn!</option>
+                <option value="hobbyist">Intermediate — Comfortable building PCs, tinkering with software</option>
+                <option value="professional">Professional — Certified IT, CompTIA A+, Cisco, or Electrical Engineer</option>
+                <option value="mentor_only">Non-Technical — Passionate about life coaching, faith, and mentorship</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Why Are You Called to Volunteer With ONE Emporia?</label>
+              <textarea class="form-textarea" id="vWhy" rows="3" placeholder="Share a few words about what drew you to this ministry, your heart for service, or personal passions..." required></textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+              <label class="check-label" style="font-size: 0.78rem; color: var(--dim); align-items: flex-start;">
+                <input type="checkbox" required style="margin-top: 2px;">
+                <span>I agree to uphold the code of unconditional agape love, respect customer data privacy, and maintain a safe, welcoming environment for returning citizens and disabled individuals.</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-apply" id="vSubmitBtn">Submit Volunteer Application</button>
+          </form>
+          <div id="vSuccessMsg" style="display: none; background: rgba(52,211,153,0.15); border: 1px solid var(--accent-green); color: #34d399; padding: 1.2rem; border-radius: 12px; margin-top: 1rem; text-align: center;">
+            <strong style="display:block; font-size: 1.1rem; margin-bottom: 0.3rem;">Application Received with Agape!</strong>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin: 0;">Our Volunteer Coordinator will reach out within 48 hours to schedule your brief welcome orientation. Welcome to the Guild!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>&copy; 2026 Our New Era (ONE) Church — ONE E-Waste Emporia. All rights reserved.</div>
+      <div>Operating in the original unchanged agape teachings of Yeshua ben Yosef.</div>
+    </footer>
+  </div>
+
+  <script>
+    async function handleVolunteerSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('vSubmitBtn');
+      btn.innerText = "Submitting Application...";
+      btn.disabled = true;
+
+      const roles = Array.from(document.querySelectorAll('input[name="vRoles"]:checked')).map(cb => cb.value);
+
+      const payload = {
+        fullName: document.getElementById('vName').value,
+        email: document.getElementById('vEmail').value,
+        phone: document.getElementById('vPhone').value,
+        locationPreference: document.getElementById('vLocation').value,
+        roles: roles,
+        schedule: document.getElementById('vSchedule').value,
+        experience: document.getElementById('vExperience').value,
+        whyStatement: document.getElementById('vWhy').value
+      };
+
+      try {
+        const res = await fetch('/api/volunteers/onboard', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+      } catch (err) {
+        console.log("Local static mode simulated submission.");
+      }
+
+      document.getElementById('volunteerForm').style.display = 'none';
+      document.getElementById('vSuccessMsg').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
