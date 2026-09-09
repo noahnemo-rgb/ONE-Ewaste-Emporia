@@ -452,6 +452,40 @@ app.post('/api/webhooks/easypost', async (req, res) => {
   }
 });
 
+
+// -------------------------------------------------------------
+// API: AI Agape Chatbot for Customer, Tech, Training & Support
+// -------------------------------------------------------------
+app.post('/api/chat', (req, res) => {
+  const { message } = req.body;
+  if (!message) return res.status(400).json({ error: 'Message is required.' });
+
+  const query = message.toLowerCase();
+  let reply = "";
+
+  if (query.includes('50') || query.includes('diagnostic') || query.includes('repair') || query.includes('estimate')) {
+    reply = "<strong>Diagnostics & Repairs:</strong> Diagnostic intake has an initial $50 flat fee. Within 5 business days, our apprentice technicians and supervisory engineers issue an itemized written estimate. If you approve the repair, 100% of the $50 fee is credited toward your final repair invoice. If declined, your pre-selected disposition applies. <a href='terms.html'>View Terms</a>";
+  } else if (query.includes('data') || query.includes('recover') || query.includes('passkey') || query.includes('sms')) {
+    reply = "<strong>Data Sanctuary Delivery:</strong> Recovered files are delivered via an encrypted 14-day cloud vault (download PIN sent out-of-band via SMS) or hardware-encrypted USB/SSD (Zero-Key In-Box rule). The lab retains an offline staging copy for 30 days before permanent NIST SP 800-88 cryptographic purging. <a href='DATA_RECOVERY_PROTOCOL.md'>View Protocol</a>";
+  } else if (query.includes('volunteer') || query.includes('serve') || query.includes('join')) {
+    reply = "<strong>Volunteer Guild (How, When, Where, Why):</strong> Serve in hardware repair, Linux flashing, life-skills mentoring for returning citizens, or Saturday community e-waste drives. Shifts include Tue/Thu mornings, Wed evening solder lab, or remote virtual tutoring. <a href='volunteer.html'>Apply to Volunteer &rarr;</a>";
+  } else if (query.includes('passport') || query.includes('comptia') || query.includes('training') || query.includes('apprentice')) {
+    reply = "<strong>Apprentice Skills Passport:</strong> Our 16-week vocational practicum aligns with CompTIA A+ core competencies. The digital passport logs verified lab hours, repaired computers, and NIST sanitizations, generating a print-ready employer transcript. <a href='passport.html' target='_blank'>View Skills Passport &rarr;</a>";
+  } else if (query.includes('triage') || query.includes('troubleshoot') || query.includes('assistant')) {
+    reply = "<strong>Triage Decision Assistant:</strong> Our interactive diagnostic troubleshooter guides technicians through symptom analysis (dead power rails, display failure, RAM errors, thermal shutdowns) with exact multimeter checks and laboratory SOPs. <a href='triage-assistant.html' target='_blank'>Open Triage Assistant &rarr;</a>";
+  } else if (query.includes('store') || query.includes('buy') || query.includes('shop') || query.includes('laptop')) {
+    reply = "<strong>Community Upcycled Storefront:</strong> High-performance refurbished laptops ($125-$195) and mini PCs ($95) with fast SSDs, Linux Mint or Windows 11 Pro, new thermal paste, and a 90-Day Guild Warranty. 100% of proceeds fund apprentice wages. <a href='store.html'>Visit Storefront &rarr;</a>";
+  } else if (query.includes('enterprise') || query.includes('fleet') || query.includes('itad') || query.includes('corporate')) {
+    reply = "<strong>Fleet ITAD & Decommissioning:</strong> Free dock pickup for lots of 15+ devices, serialized NIST 800-88 wipe certificates, 501(c)(3) tax receipts, and CSR impact reporting. <a href='enterprise.html'>Fleet Decommissioning Portal &rarr;</a>";
+  } else if (query.includes('track') || query.includes('status') || query.includes('order')) {
+    reply = "<strong>Order Tracking Portal:</strong> Enter your Work Order ID or phone number to check live milestone progress, inspect written estimates, or download signed certificates. <a href='track.html'>Track Order &rarr;</a>";
+  } else {
+    reply = "Peace be with you! I am the ONE Emporia AI Assistant. We provide diagnostic computer repairs ($50 fee credited to invoice), certified NIST 800-88 data recovery, vocational training for returning citizens and disabled apprentices, and upcycled computer sales. How can we serve you today?";
+  }
+
+  res.json({ success: true, reply });
+});
+
 app.listen(PORT, () => {
   console.log(`ONE E-Waste Emporia server running on http://localhost:${PORT}`);
 });

@@ -159,3 +159,15 @@ Designed around the **How, When, Where, and Why** framework:
    - **QR Code on Certificates:** Every Certificate of Data Sanitization includes a dynamically generated QR code encoding the immutable verification URL.
    - **Printable Chassis Sticker Mode:** Technicians can click **"Print Chassis QR Sticker"** to generate a compact 2" x 2" label formatted for direct application to the computer chassis.
    - **Public Attestation Ledger (`public/verify.html`):** Anyone scanning the QR code on the paper certificate or computer case is taken directly to the cryptographic verification page displaying the SHA-256 hash, NIST SP 800-88 sanitization method, and church supervisor sign-off.
+
+---
+
+## ONE Emporia AI Agape Chatbot Widget (`public/assets/chatbot.js`)
+
+A multi-purpose, floating conversational assistant embedded across all portal pages:
+- **Customer Service:** Answers questions on the $50 flat diagnostic deposit, written estimates, and pre-paid shipping label generation.
+- **Data Recovery & Privacy Guidance:** Explains our 14-day AES-256 cloud vault, out-of-band SMS passkey delivery, and 30-day laboratory safety holding policies.
+- **Vocational Training & Apprenticeships:** Connects users directly to the CompTIA A+ curriculum, live Apprentice Skills Passports (`passport.html`), and the interactive Triage Assistant (`triage-assistant.html`).
+- **Volunteer Onboarding (How/When/Where/Why):** Guides volunteers to the application portal and explains shifts at the church tech annex, community pop-ups, and remote tutoring.
+- **Storefront & Fleet ITAD Inquiries:** Assists customers with laptop purchases and corporate IT directors with fleet decommissioning pickups and 501(c)(3) tax valuations.
+- **Backend API (`POST /api/chat`):** Express REST endpoint with graceful client-side fallback if running in offline static mode.
