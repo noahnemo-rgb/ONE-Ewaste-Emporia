@@ -37,7 +37,11 @@
 ONE-Ewaste-Emporia/
 ├── public/
 │   ├── index.html
-│   ├── volunteer.html          # NEW: Dedicated volunteer onboarding portal (The 4 W's: How, When, Where, Why)              # Customer landing page & work order wizard
+│   ├── volunteer.html
+│   ├── store.html              # NEW: Community upcycled hardware storefront & catalog
+│   ├── enterprise.html         # NEW: Corporate, school & church fleet decommissioning ITAD portal
+│   ├── passport.html           # NEW: Apprentice skills passport & portfolio transcript
+│   ├── triage-assistant.html   # NEW: Guided diagnostic troubleshooter & teaching decision tree          # NEW: Dedicated volunteer onboarding portal (The 4 W's: How, When, Where, Why)              # Customer landing page & work order wizard
 │   ├── track.html              # NEW: Customer self-service tracking & estimate approval portal
 │   ├── certificate.html        # NEW: Verifiable NIST 800-88 certificate & 501(c)(3) tax receipt
 │   ├── admin.html              # Apprentice & supervisor triage workbench UI
@@ -108,3 +112,33 @@ Designed around the **How, When, Where, and Why** framework:
 - **HOW:** Structured onboarding tracks (Hardware Diagnostics, Linux/Software, Mentorship/Life Coaching, Logistics/Sorting).
 - **WHEN:** Flexible shifts including Tuesday/Thursday Morning Guild, Wednesday Evening Fellowship & Solder Lab, and 1st/3rd E-Waste Saturday Community Drives.
 - **WHERE:** Tech Sanctuary Annex (Atlanta, GA), Regional Drop-off Satellites, and Remote Virtual Lab.
+
+
+---
+
+## Vocational Guild & Educational Growth Systems
+
+1. **Digital "Apprentice Passport" (`public/passport.html`):**
+   - Tracks each apprentice's logged repair hours, NIST 800-88 sanitizations, and Linux computer refurbishments.
+   - Measures progress across five CompTIA A+ core competency domains.
+   - Includes a print-optimized **Employer Transcript & Ministry Attestation** that returning citizens and disabled apprentices can take directly to commercial IT hiring managers.
+
+2. **Interactive Triage Decision Assistant (`public/triage-assistant.html`):**
+   - A step-by-step diagnostic tree that guides apprentices through bench symptom analysis (Dead Power / Shorted Rails, No POST, Memory Failures, Storage Diagnostics, Thermal Shutdowns, and Liquid Spill Recovery).
+   - Provides exact laboratory Standard Operating Procedures (SOPs) and voltage checkpoints.
+
+
+---
+
+## Sustainable Revenue & Community Hardware Systems
+
+1. **The Community Upcycled Storefront (`public/store.html`):**
+   - High-performance, apprentice-refurbished laptops, desktops, and mini PCs ($35 to $195).
+   - 100% of proceeds fund living-wage stipends for returning citizens and disabled apprentices.
+   - Pre-installed with Linux Mint or Windows 11 Pro Refurbisher licenses.
+   - Full 90-Day Guild Warranty and NIST SP 800-88 cryptographic drive wipe proof.
+
+2. **Corporate & Fleet Decommissioning Portal (`public/enterprise.html`):**
+   - IT Asset Disposition (ITAD) for companies, schools, and churches retiring 10 to 500+ machines.
+   - Free dock-to-dock freight pickup, serialized NIST SP 800-88 sanitization certificates, and 501(c)(3) equipment tax contribution receipts.
+   - Interactive Fleet Social Impact & Tax Valuation Calculator (calculates diverted pounds of e-waste, carbon offsets, and apprentice hours funded).

@@ -322,6 +322,79 @@ app.post('/api/volunteers/onboard', (req, res) => {
   });
 });
 
+
+// -------------------------------------------------------------
+// API: Apprentice Skills Passport & Competency Verification
+// -------------------------------------------------------------
+app.get('/api/apprentices/:id/passport', (req, res) => {
+  const { id } = req.params;
+  res.json({
+    success: true,
+    apprenticeId: id,
+    fullName: "Marcus Vance",
+    cohort: 4,
+    programTrack: "fair_chance_reentry",
+    hoursLogged: 320,
+    metrics: {
+      devicesRepaired: 54,
+      drivesSanitized: 38,
+      laptopsGifted: 27,
+      safetyAuditPass: "100%"
+    },
+    competencies: {
+      hardwareDiagnostics: 92,
+      dataSanitization: 95,
+      linuxDeployment: 88,
+      customerEstimation: 85,
+      safetyAndEsd: 100
+    },
+    supervisorEndorsement: "Demonstrated exceptional technical rigor, punctuality, and servant leadership on diagnostic benches."
+  });
+});
+
+
+// -------------------------------------------------------------
+// API: Storefront Inventory & Checkout
+// -------------------------------------------------------------
+app.get('/api/store/inventory', (req, res) => {
+  res.json({
+    success: true,
+    items: [
+      { id: 'PROD-01', title: 'Lenovo ThinkPad T480', category: 'laptop', specs: 'Intel i5-8350U | 16GB RAM | 512GB NVMe', price: 165, inStock: true },
+      { id: 'PROD-02', title: 'Dell Latitude 5490', category: 'laptop', specs: 'Intel i5-8250U | 8GB RAM | 256GB SSD', price: 125, inStock: true },
+      { id: 'PROD-03', title: 'HP EliteDesk 800 G3 Mini', category: 'desktop', specs: 'Intel i5-6500T | 16GB RAM | 256GB NVMe', price: 95, inStock: true },
+      { id: 'PROD-04', title: 'Dell OptiPlex 7050 SFF', category: 'desktop', specs: 'Intel i7-7700 | 16GB RAM | 512GB NVMe', price: 145, inStock: true },
+      { id: 'PROD-05', title: 'Guild 512GB SATA SSD Kit', category: 'storage', specs: '540 MB/s Read | 3D NAND | USB Transfer Cable', price: 35, inStock: true },
+      { id: 'PROD-06', title: 'Apple MacBook Air 13" A1466', category: 'laptop', specs: 'Intel Core i5 | 8GB RAM | 256GB SSD', price: 195, inStock: true }
+    ]
+  });
+});
+
+app.post('/api/store/checkout', async (req, res) => {
+  const { items, customerEmail, shippingAddress } = req.body;
+  console.log(`[Store Checkout] Session started for ${customerEmail} - ${items.length} items`);
+  res.json({
+    success: true,
+    orderId: 'ORD-' + Date.now().toString(36).toUpperCase(),
+    message: 'Stripe Checkout Session initialized.'
+  });
+});
+
+// -------------------------------------------------------------
+// API: Enterprise Fleet Decommissioning Intake
+// -------------------------------------------------------------
+app.post('/api/enterprise/decommission', (req, res) => {
+  const { orgName, contactName, contactEmail, contactPhone, quantity, hardwareType, address } = req.body;
+  const leadId = 'ITAD-' + Date.now().toString(36).toUpperCase();
+  console.log(`[Fleet Decommissioning] New enterprise inquiry: ${leadId} - ${orgName} (${quantity} ${hardwareType})`);
+
+  res.json({
+    success: true,
+    leadId,
+    message: 'Fleet inquiry received. ITAD logistics manager will contact within 24 hours.'
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`ONE E-Waste Emporia server running on http://localhost:${PORT}`);
 });

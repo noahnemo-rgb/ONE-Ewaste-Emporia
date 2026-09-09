@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corporate & Fleet Decommissioning — ONE E-Waste Emporia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(18, 24, 38, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --accent: #38bdf8;
+      --accent-purple: #c084fc;
+      --accent-green: #34d399;
+      --text: #f3f5f9;
+      --muted: #9ba3b8;
+      --dim: #647087;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      padding: 1.5rem;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.16), transparent 40%),
+        radial-gradient(circle at 15% 75%, rgba(139, 92, 246, 0.12), transparent 45%),
+        radial-gradient(circle at 50% 50%, #080b12 0%, #030407 100%);
+      background-attachment: fixed;
+    }
+
+    header {
+      max-width: 1150px;
+      margin: 0 auto 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
+    .brand img { width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); }
+    .brand-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .brand-sub { font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; display: block; }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+    .nav-link:hover { color: #fff; }
+
+    .container { max-width: 1150px; margin: 0 auto; }
+
+    /* Hero Banner */
+    .ent-hero {
+      background: linear-gradient(135deg, rgba(16, 28, 48, 0.9) 0%, rgba(14, 20, 36, 0.95) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: 24px;
+      padding: 3.5rem 3rem;
+      margin-bottom: 3.5rem;
+      box-shadow: 0 25px 60px -15px rgba(0,0,0,0.7);
+      position: relative;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #7dd3fc;
+      padding: 0.35rem 0.95rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .ent-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+    .ent-title span {
+      background: linear-gradient(135deg, #fff, #38bdf8 60%, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .ent-lead {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 750px;
+      margin-bottom: 2rem;
+    }
+    .btn-ent {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: #fff;
+      padding: 0.9rem 1.8rem;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Calculator Box */
+    .calc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 3.5rem;
+      backdrop-filter: blur(12px);
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+    .calc-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .slider-group { margin: 1.5rem 0; }
+    .slider-label { display: flex; justify-content: space-between; font-weight: 600; font-size: 0.95rem; color: #fff; margin-bottom: 0.5rem; }
+    .slider-input {
+      width: 100%;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .calc-results {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .c-res-item strong { display: block; font-size: 0.75rem; color: var(--muted); text-transform: uppercase; margin-bottom: 0.2rem; }
+    .c-res-val { font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; font-weight: 700; color: #fff; }
+
+    /* The 4 Enterprise Guarantees */
+    .guarantees-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+    .g-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.8rem 1.5rem;
+    }
+    .g-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+    .g-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: #fff; margin-bottom: 0.4rem; font-weight: 700; }
+    .g-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+
+    /* Intake Form */
+    .intake-section {
+      background: linear-gradient(180deg, rgba(20, 24, 38, 0.9) 0%, rgba(10, 13, 22, 0.98) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: 24px;
+      padding: 3.5rem;
+      margin-bottom: 4rem;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: #cbd5e1; margin-bottom: 0.35rem; text-transform: uppercase; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; background: rgba(10, 14, 24, 0.85); border: 1px solid var(--border);
+      border-radius: 10px; padding: 0.8rem 1rem; color: #fff; font-family: inherit; font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding-top: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--dim);
+    }
+
+    @media (max-width: 992px) {
+      .calc-grid, .form-grid { grid-template-columns: 1fr; }
+      .guarantees-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .guarantees-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/one_logo.jpg" alt="ONE Church Emblem">
+      <div>
+        <span class="brand-title">ONE Emporia</span>
+        <span class="brand-sub">Corporate & Church Fleet ITAD Portal</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="store.html" class="nav-link" style="color: var(--accent-purple); font-weight: 600;">Community Storefront</a>
+      <a href="volunteer.html" class="nav-link">Volunteer Guild</a>
+      <a href="track.html" class="nav-link">Track Order</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="ent-hero">
+      <div class="hero-badge">&#10022; Corporate Social Responsibility (CSR) &bull; Zero-Landfill ITAD</div>
+      <h1 class="ent-title">Retire Corporate Hardware into <span>Living Purpose.</span></h1>
+      <p class="ent-lead">
+        When your company, school, or church upgrades its computer fleet, don't let retired assets gather dust in storage or vanish into overseas landfills. ONE E-Waste Emporia provides secure, certified IT Asset Disposition (ITAD) that turns your decommissioned hardware into vocational training and student tech grants.
+      </p>
+      <a href="#intake" class="btn-ent">Schedule Fleet Decommissioning Call &rarr;</a>
+    </section>
+
+    <!-- 4 Guarantees -->
+    <div class="guarantees-grid">
+      <div class="g-card">
+        <div class="g-icon">&#128274;</div>
+        <div class="g-title">NIST SP 800-88 Purge</div>
+        <div class="g-desc">Serialized, cryptographic wipe certificates for every storage drive. Zero corporate data leakage liability.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">&#128196;</div>
+        <div class="g-title">501(c)(3) Tax Receipt</div>
+        <div class="g-desc">Full fair-market equipment valuation receipts for your corporate balance sheet and annual non-profit tax filings.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">&#128666;</div>
+        <div class="g-title">Free Freight / Pallet Pickup</div>
+        <div class="g-desc">Complimentary dock-to-dock freight pickup for lots of 15+ machines anywhere in the continental United States.</div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">&#127793;</div>
+        <div class="g-title">CSR ESG Impact Audit</div>
+        <div class="g-desc">Audited reports showing total pounds diverted from landfills, carbon offset metrics, and student laptops gifted.</div>
+      </div>
+    </div>
+
+    <!-- Impact & Tax Calculator -->
+    <div class="calc-card">
+      <div class="calc-grid">
+        <div>
+          <h3 class="calc-title">Fleet Social Impact & Valuation Calculator</h3>
+          <p style="color: var(--muted); font-size: 0.9rem;">
+            Slide to estimate the environmental diversion, student impact, and 501(c)(3) valuation of retiring your organization's devices.
+          </p>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>Laptops / Desktops to Decommission:</span>
+              <span id="unitDisplay" style="color: var(--accent); font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem;">50 Units</span>
+            </div>
+            <input type="range" class="slider-input" id="unitSlider" min="10" max="500" step="5" value="50" oninput="updateFleetCalc(this.value)">
+          </div>
+
+          <p style="font-size: 0.8rem; color: var(--dim);">
+            Calculated using standard EPA e-waste weight coefficients and secondary market refurbisher pricing models.
+          </p>
+        </div>
+
+        <div class="calc-results">
+          <div class="c-res-item">
+            <strong>Estimated 501(c)(3) Tax Valuation</strong>
+            <div class="c-res-val" id="resTaxVal" style="color: var(--accent-green);">$7,500</div>
+          </div>
+          <div class="c-res-item">
+            <strong>Toxic E-Waste Diverted</strong>
+            <div class="c-res-val" id="resEwasteVal" style="color: var(--accent);">600 lbs</div>
+          </div>
+          <div class="c-res-item">
+            <strong>Student Laptops Gifted</strong>
+            <div class="c-res-val" id="resLaptopsVal" style="color: #fff;">35 Units</div>
+          </div>
+          <div class="c-res-item">
+            <strong>Apprentice Wages Funded</strong>
+            <div class="c-res-val" id="resHoursVal" style="color: #facc15;">150 Hours</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fleet Intake Form -->
+    <section class="intake-section" id="intake">
+      <div class="form-grid">
+        <div>
+          <span style="color: var(--accent); font-weight: 700; font-size: 0.8rem; text-transform: uppercase;">Organization ITAD Intake</span>
+          <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; color: #fff; margin: 0.5rem 0 1rem;">Schedule Your Fleet Pickup</h3>
+          <p style="color: var(--muted); font-size: 0.92rem; line-height: 1.7; margin-bottom: 1.5rem;">
+            Whether retiring 15 laptops from a regional non-profit or 250 workstations from an enterprise tech refresh, our logistics team manages shipping, chain-of-custody, sanitization, and tax documentation.
+          </p>
+          <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; font-size: 0.82rem; color: #cbd5e1;">
+            <strong>Need Bulk Serial Number Upload?</strong><br>
+            You can email your IT hardware asset spreadsheet (.csv or .xlsx) directly to <code>fleet@onechurch.global</code> for an expedited dock pickup proposal.
+          </div>
+        </div>
+
+        <div>
+          <form onsubmit="handleEnterpriseSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Organization / Company Name</label>
+              <input type="text" class="form-input" id="orgName" placeholder="e.g. Grace Christian Academy / TechCorp LLC" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1.2rem;">
+              <div>
+                <label class="form-label">Contact Person</label>
+                <input type="text" class="form-input" id="orgContact" placeholder="Full Name" required>
+              </div>
+              <div>
+                <label class="form-label">Direct Phone</label>
+                <input type="tel" class="form-input" id="orgPhone" placeholder="(555) 000-0000" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Work Email Address</label>
+              <input type="email" class="form-input" id="orgEmail" placeholder="it-director@organization.org" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1.2rem;">
+              <div>
+                <label class="form-label">Estimated Quantity</label>
+                <select class="form-select" id="orgQty">
+                  <option value="10-25">10 to 25 Devices</option>
+                  <option value="25-50" selected>25 to 50 Devices</option>
+                  <option value="50-100">50 to 100 Devices</option>
+                  <option value="100-250">100 to 250 Devices</option>
+                  <option value="250+">250+ Enterprise Lot</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label">Primary Hardware Type</label>
+                <select class="form-select" id="orgType">
+                  <option value="laptops">Laptops / MacBooks</option>
+                  <option value="desktops">Desktop Towers / SFF PCs</option>
+                  <option value="mixed">Mixed Laptops & Desktops</option>
+                  <option value="servers">Servers & Network Gear</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Facility Location / Dock Address</label>
+              <input type="text" class="form-input" id="orgAddress" placeholder="Street Address, City, State, ZIP" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Additional Decommissioning Requirements</label>
+              <textarea class="form-textarea" rows="2" placeholder="e.g. Need hard drive shredding certificates, loading dock height, preferred pickup date..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-ent" style="width: 100%; justify-content: center;" id="entBtn">Submit Fleet Decommissioning Request</button>
+          </form>
+
+          <div id="entSuccess" style="display: none; background: rgba(52,211,153,0.15); border: 1px solid var(--accent-green); color: #34d399; padding: 1.2rem; border-radius: 12px; margin-top: 1rem; text-align: center;">
+            <strong style="display:block; font-size: 1.05rem; margin-bottom: 0.3rem;">Decommissioning Request Received!</strong>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin: 0;">Our ITAD Logistics Coordinator will contact you within 24 hours with freight scheduling and serialized custody paperwork.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div>&copy; 2026 Our New Era (ONE) Church — ONE E-Waste Emporia. All rights reserved.</div>
+      <div>Operating under the universal agape of Yeshua ben Yosef.</div>
+    </footer>
+  </div>
+
+  <script>
+    function updateFleetCalc(units) {
+      document.getElementById('unitDisplay').innerText = `${units} Units`;
+      const taxVal = units * 150;
+      const ewasteLbs = units * 12;
+      const laptopsGifted = Math.round(units * 0.7);
+      const apprenticeHours = units * 3;
+
+      document.getElementById('resTaxVal').innerText = `$${taxVal.toLocaleString()}`;
+      document.getElementById('resEwasteVal').innerText = `${ewasteLbs.toLocaleString()} lbs`;
+      document.getElementById('resLaptopsVal').innerText = `${laptopsGifted} Units`;
+      document.getElementById('resHoursVal').innerText = `${apprenticeHours} Hours`;
+    }
+
+    function handleEnterpriseSubmit(e) {
+      e.preventDefault();
+      document.getElementById('entBtn').innerText = "Submitting...";
+      document.getElementById('entBtn').disabled = true;
+
+      setTimeout(() => {
+        document.querySelector('#intake form').style.display = 'none';
+        document.getElementById('entSuccess').style.display = 'block';
+      }, 800);
+    }
+  </script>
+</body>
+</html>

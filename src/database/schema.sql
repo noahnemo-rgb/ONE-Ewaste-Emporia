@@ -125,3 +125,80 @@ CREATE TABLE IF NOT EXISTS volunteers (
     assigned_station VARCHAR(100),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- 7. Vocational Apprentices & CompTIA A+ Competency Tracking
+CREATE TABLE IF NOT EXISTS apprentices (
+    id VARCHAR(64) PRIMARY KEY,
+    user_id VARCHAR(64) REFERENCES users(id),
+    full_name VARCHAR(255) NOT NULL,
+    cohort_number INTEGER DEFAULT 1,
+    program_track VARCHAR(50) NOT NULL DEFAULT 'fair_chance_reentry', -- 'fair_chance_reentry', 'disability_vocational', 'youth_guild'
+    mentor_supervisor_id VARCHAR(64),
+    hours_logged INTEGER DEFAULT 0,
+    comptia_core1_readiness INTEGER DEFAULT 0, -- percentage 0 - 100
+    comptia_core2_readiness INTEGER DEFAULT 0,
+    devices_repaired_count INTEGER DEFAULT 0,
+    drives_sanitized_count INTEGER DEFAULT 0,
+    laptops_gifted_count INTEGER DEFAULT 0,
+    supervisor_endorsement_notes TEXT,
+    graduation_date TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS apprentice_practicum_logs (
+    id VARCHAR(64) PRIMARY KEY,
+    apprentice_id VARCHAR(64) NOT NULL REFERENCES apprentices(id) ON DELETE CASCADE,
+    work_order_id VARCHAR(64) REFERENCES work_orders(id),
+    task_category VARCHAR(100) NOT NULL, -- 'dc_jack_repair', 'memtest86', 'thermal_paste', 'nist_sanitization', 'linux_install'
+    hours_spent NUMERIC(4, 2) NOT NULL,
+    supervisor_signoff BOOLEAN DEFAULT TRUE,
+    timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 8. Upcycled Community Storefront Inventory & Orders
+CREATE TABLE IF NOT EXISTS store_inventory (
+    id VARCHAR(64) PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    category VARCHAR(50) NOT NULL,              -- 'laptop', 'desktop', 'storage', 'accessory'
+    specs_summary VARCHAR(255) NOT NULL,
+    description TEXT,
+    price_cents INTEGER NOT NULL,               -- e.g. 16500 = $165.00
+    quantity_in_stock INTEGER NOT NULL DEFAULT 1,
+    os_installed VARCHAR(100) DEFAULT 'Linux Mint 21.3 Cinnamon',
+    refurbished_by_apprentice_id VARCHAR(64) REFERENCES apprentices(id),
+    nist_wipe_hash VARCHAR(128),
+    warranty_days INTEGER DEFAULT 90,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS store_orders (
+    id VARCHAR(64) PRIMARY KEY,
+    customer_name VARCHAR(255) NOT NULL,
+    customer_email VARCHAR(255) NOT NULL,
+    customer_phone VARCHAR(50),
+    shipping_address TEXT NOT NULL,
+    items_json TEXT NOT NULL,                   -- JSON array of purchased inventory items
+    total_amount_cents INTEGER NOT NULL,
+    stripe_session_id VARCHAR(255),
+    fulfillment_status VARCHAR(50) DEFAULT 'paid_pending_shipment',
+    outbound_tracking_number VARCHAR(100),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 9. Corporate & Church Fleet Decommissioning (ITAD) Intakes
+CREATE TABLE IF NOT EXISTS enterprise_decommissions (
+    id VARCHAR(64) PRIMARY KEY,
+    organization_name VARCHAR(255) NOT NULL,
+    contact_name VARCHAR(255) NOT NULL,
+    contact_email VARCHAR(255) NOT NULL,
+    contact_phone VARCHAR(50) NOT NULL,
+    facility_address TEXT NOT NULL,
+    estimated_quantity VARCHAR(50) NOT NULL,    -- '10-25', '25-50', '50-100', '100-250', '250+'
+    primary_hardware_type VARCHAR(50) NOT NULL, -- 'laptops', 'desktops', 'mixed', 'servers'
+    additional_notes TEXT,
+    proposal_status VARCHAR(50) DEFAULT 'inquiry_received', -- 'inquiry_received', 'dock_pickup_scheduled', 'in_annex_triage', 'completed_certified'
+    master_sanitization_cert_id VARCHAR(64),
+    tax_receipt_id VARCHAR(64),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);

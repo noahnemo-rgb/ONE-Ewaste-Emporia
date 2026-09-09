@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Triage Decision Assistant — ONE Vocational Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: rgba(18, 24, 38, 0.85);
+      --border: rgba(255, 255, 255, 0.1);
+      --accent: #c084fc;
+      --accent-blue: #38bdf8;
+      --accent-green: #34d399;
+      --accent-amber: #facc15;
+      --text: #f3f5f9;
+      --muted: #9ba3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      padding: 1.5rem;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 85% 15%, rgba(56, 189, 248, 0.14), transparent 40%),
+        radial-gradient(circle at 15% 75%, rgba(192, 132, 252, 0.12), transparent 45%),
+        radial-gradient(circle at 50% 50%, #080b12 0%, #030407 100%);
+      background-attachment: fixed;
+    }
+    header {
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .brand { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: inherit; }
+    .brand img { width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); }
+    .brand-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; color: #fff; }
+    .brand-sub { font-size: 0.72rem; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.08em; display: block; }
+    .nav-link { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+    .nav-link:hover { color: #fff; }
+
+    .container { max-width: 860px; margin: 0 auto; }
+
+    /* Interactive Tree Card */
+    .tree-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+      backdrop-filter: blur(14px);
+    }
+    .tree-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #7dd3fc;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+    }
+    .step-question {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+    .step-hint {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+    .opt-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.4rem;
+      color: #fff;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+    .opt-btn:hover {
+      background: rgba(192, 132, 252, 0.15);
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+    .opt-arrow { color: var(--accent); font-weight: bold; }
+
+    /* Diagnostic Result & Remedy Box */
+    .remedy-box {
+      background: rgba(52, 211, 153, 0.08);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 16px;
+      padding: 1.8rem;
+      margin-top: 1.5rem;
+      display: none;
+    }
+    .remedy-title { font-size: 1.2rem; font-weight: 700; color: #34d399; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    .remedy-steps { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; font-size: 0.9rem; color: #cbd5e1; }
+    .remedy-steps li { display: flex; gap: 0.5rem; }
+    .remedy-steps li span { color: var(--accent-green); font-weight: bold; }
+
+    .btn-reset {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.85rem;
+      margin-top: 1.5rem;
+      transition: 0.2s;
+    }
+    .btn-reset:hover { background: rgba(255, 255, 255, 0.12); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand">
+      <img src="assets/one_logo.jpg" alt="ONE Church Emblem">
+      <div>
+        <span class="brand-title">ONE Vocational Lab</span>
+        <span class="brand-sub">Apprentice Triage Decision Assistant</span>
+      </div>
+    </a>
+    <div>
+      <a href="passport.html" class="nav-link" style="color: var(--accent); font-weight: 600; margin-right: 1.2rem;">&#127942; Apprentice Passport</a>
+      <a href="admin.html" class="nav-link">Back to Workbench</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tree-card">
+      <div class="tree-badge" id="stepBadge">Step 1 of 3: Primary Symptom</div>
+      <h2 class="step-question" id="stepQuestion">What primary symptom does the device exhibit at bench intake?</h2>
+      <p class="step-hint" id="stepHint">Verify your ESD wrist strap is grounded and inspect battery health before pressing power.</p>
+
+      <div class="options-grid" id="optionsContainer">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="remedy-box" id="remedyContainer">
+        <div class="remedy-title" id="remedyTitle">&#10004; Diagnostic Hypothesis & Lab Action Plan</div>
+        <div id="remedyBody" style="font-size: 0.92rem; color: #cbd5e1; line-height: 1.7;"></div>
+        <button class="btn-reset" onclick="resetTree()">Start New Diagnostic Tree</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const decisionTree = {
+      start: {
+        badge: "Step 1 of 3: Primary Symptom",
+        question: "What primary symptom does the device exhibit at bench intake?",
+        hint: "Inspect power adapter with multimeter (19V-20V DC expected). Ensure battery has no physical swelling.",
+        options: [
+          { text: "Completely Dead — No LED, no fan, no power response", next: "dead_power" },
+          { text: "Powers on but No Display (Black Screen / Fan Spins)", next: "no_display" },
+          { text: "Boots to Blue Screen / Kernel Panic / Storage Error", next: "storage_error" },
+          { text: "Powers on, but Shuts Down After 2-5 Minutes (Overheating)", next: "thermal_shutdown" },
+          { text: "Liquid Spill or Sticky Residue on Motherboard", next: "liquid_spill" }
+        ]
+      },
+      dead_power: {
+        badge: "Step 2 of 3: Power Subsystem Probing",
+        question: "Probe DC input jack and primary power rail with your multimeter. What do you observe?",
+        hint: "Check resistance to ground on main input mosfets (looking for low resistance < 10 ohms).",
+        options: [
+          { text: "0V on motherboard DC jack — Center pin broken or loose", remedy: "dc_jack_broken" },
+          { text: "Short circuit to ground on main 19V rail (< 5 ohms)", remedy: "shorted_rail" },
+          { text: "19V present, but 3.3V/5V Standby Rails are missing (0V)", remedy: "standby_pmic" },
+          { text: "CMOS Coin-cell battery reads below 2.5V", remedy: "cmos_dead" }
+        ]
+      },
+      no_display: {
+        badge: "Step 2 of 3: POST Subsystem Diagnostics",
+        question: "Observe diagnostic indicator LEDs, caps-lock blink code, or connect external monitor via HDMI. What happens?",
+        hint: "Listen for motherboard beep codes or count power LED pulse patterns (e.g. 3 amber, 2 white).",
+        options: [
+          { text: "Display appears normally on External HDMI monitor", remedy: "bad_edp_cable" },
+          { text: "Caps-lock blinks memory error code (e.g., 3 blinks)", remedy: "reseat_ram" },
+          { text: "Screen shows faint ghost image with flashlight held close", remedy: "blown_backlight_fuse" }
+        ]
+      },
+      storage_error: {
+        badge: "Step 2 of 3: Storage & Filesystem Health",
+        question: "Boot Linux Live USB (ShredOS / GParted). Does the BIOS/UEFI detect the internal drive?",
+        hint: "Run smartctl -a /dev/nvme0n1 or CrystalDiskInfo.",
+        options: [
+          { text: "Drive detected, but SMART reports Reallocated Sectors > 100", remedy: "failing_drive" },
+          { text: "Drive NOT detected at all in BIOS or lspci", remedy: "dead_controller" },
+          { text: "Drive healthy (100%), but Windows BCD / Bootloader corrupted", remedy: "rebuild_efi" }
+        ]
+      },
+      thermal_shutdown: {
+        badge: "Step 2 of 2: Thermal Diagnostics",
+        question: "Inspect heatsink fins and fan spinning speed under load. What is observed?",
+        hint: "Check if fan is clogged with dust felt or if copper heatpipe has lost vacuum vapor seal.",
+        options: [
+          { text: "Fan spins, but exhaust air is cold while CPU die is scalding (Dried paste/lost vacuum)", remedy: "thermal_repaste" },
+          { text: "Fan does not spin at all or bearings are seized", remedy: "replace_fan" }
+        ]
+      },
+      liquid_spill: {
+        badge: "Step 2 of 2: Corrosion Inspection",
+        question: "Inspect board under stereo microscope. Where is green/white oxidation visible?",
+        hint: "Do NOT apply power before ultrasonic cleaning.",
+        options: [
+          { text: "Oxidation localized near keyboard connector and power button", remedy: "ultrasonic_clean" },
+          { text: "Burned traces and pitted copper near charging PMIC", remedy: "trace_repair" }
+        ]
+      }
+    };
+
+    const remedies = {
+      dc_jack_broken: {
+        title: "Replace DC Input Harness & Re-solder Ground Pin",
+        steps: [
+          "1. Desolder or unclip damaged DC power jack from chassis.",
+          "2. Install new OEM replacement harness with heatshrink insulation.",
+          "3. Verify 19.5V DC delivery to first input MOSFET.",
+          "4. Apply -$50 diagnostic credit on customer estimate; parts cost ~$15."
+        ]
+      },
+      shorted_rail: {
+        title: "Locate and Replace Shorted Ceramic Capacitor",
+        steps: [
+          "1. Inject 1.0V (1 Amp limit) into 19V rail using bench DC power supply.",
+          "2. Use thermal camera or isopropyl alcohol evaporation technique to locate hot capacitor.",
+          "3. Desolder shorted capacitor using hot air rework station (350°C).",
+          "4. Verify short to ground is cleared (> 50k ohms) before applying power."
+        ]
+      },
+      standby_pmic: {
+        title: "Inspect 3.3V / 5V Standby Regulator & Enable Pin",
+        steps: [
+          "1. Check VREG3 and VREG5 linear regulator outputs on PMIC IC.",
+          "2. If input 19V is present but EN (enable) is 0V, inspect lid-close sensor and power switch.",
+          "3. Reflow or replace standby controller chip."
+        ]
+      },
+      cmos_dead: {
+        title: "Replace CR2032 CMOS Battery & Clear NVRAM",
+        steps: [
+          "1. Measure coin cell voltage. Replace with fresh 3.0V battery.",
+          "2. Short RTC reset pins for 15 seconds to clear corrupted BIOS state.",
+          "3. Plug in AC adapter, allow 2-minute memory retraining, and observe POST."
+        ]
+      },
+      bad_edp_cable: {
+        title: "Replace eDP Display Cable or Panel",
+        steps: [
+          "1. Inspect eDP 30-pin/40-pin cable hinge area for severed micro-coaxial wires.",
+          "2. Reseat eDP connector on motherboard and secure with Kapton tape.",
+          "3. If external works and internal cable is good, replace LCD panel."
+        ]
+      },
+      reseat_ram: {
+        title: "Clean RAM Golden Fingers & Reseat Modules",
+        steps: [
+          "1. Remove SO-DIMM sticks. Clean contacts with 99% isopropyl alcohol.",
+          "2. Test one stick in Channel A, then Channel B.",
+          "3. Run MemTest86+ for 1 full pass (0 errors required before release)."
+        ]
+      },
+      blown_backlight_fuse: {
+        title: "Replace 32V / 3A Fast-Blow Backlight Fuse (F1)",
+        steps: [
+          "1. Probe fuse adjacent to eDP connector with multimeter continuity.",
+          "2. If blown open-circuit, inspect backlight rail for short to ground.",
+          "3. Solder replacement 0603 size fuse using fine-tip iron."
+        ]
+      },
+      failing_drive: {
+        title: "Clone to NVMe SSD & Execute NIST 800-88 Sanitization",
+        steps: [
+          "1. Connect defective drive to Tableau hardware write-blocker.",
+          "2. Image data to laboratory staging NAS via Linux ddrescue.",
+          "3. Install fresh Crucial/Kingston SSD and restore OS/files.",
+          "4. Sanitize old drive or shred if hardware read errors persist."
+        ]
+      },
+      dead_controller: {
+        title: "Controller Failure — Route to Cleanroom Data Recovery Track",
+        steps: [
+          "1. Inform supervisor: NAND flash controller is unresponsive.",
+          "2. Escalate to Method B Hardware Data Recovery bench.",
+          "3. Customer estimate will reflect specialized chip-off / BGA rework."
+        ]
+      },
+      rebuild_efi: {
+        title: "Rebuild Windows EFI Bootloader Partition",
+        steps: [
+          "1. Boot Windows PE recovery media into Command Prompt.",
+          "2. Execute: bcdboot C:\Windows /s S: /f UEFI",
+          "3. Verify secure boot signatures and reboot into OS."
+        ]
+      },
+      thermal_repaste: {
+        title: "Heatsink Ultrasonic Cleaning & Arctic MX-4 Repaste",
+        steps: [
+          "1. Remove copper heatsink. Clean dried thermal paste with Arctic Silver ArctiClean.",
+          "2. Blow out dust felt compacted inside copper cooling fins.",
+          "3. Apply pea-sized dot of Arctic MX-4 or Noctua NT-H1 thermal compound.",
+          "4. Tighten heatsink screws in numbered diagonal sequence (1-2-3-4)."
+        ]
+      },
+      replace_fan: {
+        title: "Install Replacement PWM Cooling Fan",
+        steps: [
+          "1. Disconnect 4-pin fan header. Inspect tachometer pin for 5V pulse.",
+          "2. Replace seized fan assembly.",
+          "3. Run Prime95 / AIDA64 stress test for 15 minutes to verify temps < 75°C."
+        ]
+      },
+      ultrasonic_clean: {
+        title: "Ultrasonic Bath with Deionized Water & Electronics Solvent",
+        steps: [
+          "1. Remove CMOS battery, stickers, and heatsinks.",
+          "2. Submerge in heated ultrasonic tank (50°C) with Branson EC solvent for 10 minutes.",
+          "3. Bake in electronics drying oven at 65°C for 4 hours to ensure 0% moisture.",
+          "4. Test power rails on bench."
+        ]
+      },
+      trace_repair: {
+        title: "Micro-soldering Trace Jumper Wire & UV Mask",
+        steps: [
+          "1. Scrape corroded copper trace using scalpel under microscope.",
+          "2. Bridge broken connection using 0.02mm enameled copper jumper wire.",
+          "3. Coat repaired joint with green UV-curable solder mask and cure with UV light."
+        ]
+      }
+    };
+
+    function renderStep(nodeKey) {
+      const node = decisionTree[nodeKey];
+      document.getElementById('stepBadge').innerText = node.badge;
+      document.getElementById('stepQuestion').innerText = node.question;
+      document.getElementById('stepHint').innerText = node.hint;
+
+      const optsContainer = document.getElementById('optionsContainer');
+      optsContainer.innerHTML = '';
+      document.getElementById('remedyContainer').style.display = 'none';
+
+      node.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `<span>${opt.text}</span> <span class="opt-arrow">&rarr;</span>`;
+        btn.onclick = () => {
+          if (opt.next) {
+            renderStep(opt.next);
+          } else if (opt.remedy) {
+            renderRemedy(opt.remedy);
+          }
+        };
+        optsContainer.appendChild(btn);
+      });
+    }
+
+    function renderRemedy(remedyKey) {
+      const rem = remedies[remedyKey];
+      document.getElementById('remedyTitle').innerHTML = `&#10004; Proposed Plan: ${rem.title}`;
+      const remedyBody = document.getElementById('remedyBody');
+      remedyBody.innerHTML = `
+        <strong>Recommended Laboratory Standard Operating Procedure:</strong>
+        <ul class="remedy-steps">
+          ${rem.steps.map(s => `<li><span>&bull;</span> ${s}</li>`).join('')}
+        </ul>
+      `;
+      document.getElementById('remedyContainer').style.display = 'block';
+    }
+
+    function resetTree() {
+      renderStep('start');
+    }
+
+    // Initialize
+    renderStep('start');
+  </script>
+</body>
+</html>
