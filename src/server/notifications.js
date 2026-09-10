@@ -92,7 +92,7 @@ class NotificationService {
           </p>
         </div>
         <p style="text-align: center; font-size: 12px; color: #94a3b8; margin-top: 20px;">
-          Our New Era (ONE) Church &bull; 123 Sanctuary Way, Tech Annex Wing &bull; Atlanta, GA 30301
+          Our New Era (ONE) Church &bull; Decentralized Network of Family Home Churches (U.S. & Worldwide)
         </p>
       </div>
     `;

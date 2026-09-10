@@ -16,11 +16,11 @@ class ShippingService {
     const returnAddress = {
       name: "ONE E-Waste Emporia & Restorative Guild",
       company: "Our New Era (ONE) Church",
-      street1: "123 Sanctuary Way, Annex Tech Lab",
-      city: "Atlanta",
-      state: "GA",
-      zip: "30301",
-      phone: "404-555-0199"
+      street1: "Network Intake Annex / Assigned Guild Hub",
+      city: "Decentralized Network Hub",
+      state: "US",
+      zip: "00000",
+      phone: "contact@onechurch.global"
     };
 
     if (!this.isLive) {

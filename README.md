@@ -112,7 +112,7 @@ Designed around the **How, When, Where, and Why** framework:
 - **WHY:** Grounded in universal agape, restorative justice for returning citizens, empowerment of disabled technicians, and zero-landfill stewardship.
 - **HOW:** Structured onboarding tracks (Hardware Diagnostics, Linux/Software, Mentorship/Life Coaching, Logistics/Sorting).
 - **WHEN:** Flexible shifts including Tuesday/Thursday Morning Guild, Wednesday Evening Fellowship & Solder Lab, and 1st/3rd E-Waste Saturday Community Drives.
-- **WHERE:** Tech Sanctuary Annex (Atlanta, GA), Regional Drop-off Satellites, and Remote Virtual Lab.
+- **WHERE:** Tech Sanctuary Annex (Regional Family Home Church Guild Labs), Regional Drop-off Satellites, and Remote Virtual Lab.
 
 
 ---

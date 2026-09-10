@@ -1,6 +1,6 @@
 /**
  * ONE E-Waste Emporia — AI Agape Assistant Widget
- * Powered by Puter.js (Zero-Token-Cost Client Inference) with Local Knowledge Fallback
+ * Powered by Puter.js with Strict Guardrails against Hallucinated Domains & Locations
  * Ministry of Our New Era (ONE) Church
  */
 
@@ -39,7 +39,6 @@
     }
     .one-chat-bubble svg { width: 30px; height: 30px; fill: #ffffff; }
 
-    /* Welcome Tooltip Badge */
     .one-chat-badge-teaser {
       position: absolute;
       top: -42px;
@@ -88,7 +87,6 @@
     }
     .one-chat-window.open { display: flex; }
 
-    /* Header */
     .one-chat-header {
       background: linear-gradient(135deg, rgba(30, 24, 48, 0.95) 0%, rgba(20, 24, 42, 0.98) 100%);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -149,7 +147,6 @@
     }
     .one-chat-close-btn:hover { color: #ffffff; }
 
-    /* Topic Pill Selector */
     .one-chat-topics {
       display: flex;
       gap: 6px;
@@ -178,7 +175,6 @@
       color: #ffffff;
     }
 
-    /* Message List */
     .one-chat-messages {
       flex: 1;
       padding: 16px;
@@ -221,7 +217,6 @@
     .one-msg a { color: #38bdf8; text-decoration: underline; }
     .one-msg strong { color: #ffffff; }
 
-    /* Quick Suggestion Buttons */
     .one-quick-actions {
       display: flex;
       flex-wrap: wrap;
@@ -243,7 +238,6 @@
       color: #000;
     }
 
-    /* Input Footer */
     .one-chat-footer {
       padding: 12px 14px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -294,7 +288,6 @@
   `;
   document.head.appendChild(style);
 
-  // Widget DOM structure
   const bubble = document.createElement('div');
   bubble.className = 'one-chat-bubble';
   bubble.id = 'oneChatBubble';
@@ -315,7 +308,7 @@
         <div class="one-chat-avatar">&#10022;</div>
         <div class="one-chat-h-text">
           <h3>ONE Agape Assistant</h3>
-          <span>Online &bull; Free Community & Tech AI</span>
+          <span>Online &bull; Community & Tech Support</span>
         </div>
       </div>
       <button class="one-chat-close-btn" id="oneChatClose" aria-label="Close chat">
@@ -326,7 +319,6 @@
       </button>
     </div>
 
-    <!-- Quick topic pills -->
     <div class="one-chat-topics">
       <span class="one-topic-chip active" data-topic="general">All Help</span>
       <span class="one-topic-chip" data-topic="repair">Diagnostic & $50 Fee</span>
@@ -338,17 +330,16 @@
       <span class="one-topic-chip" data-topic="fleet">Corporate ITAD</span>
     </div>
 
-    <!-- Messages Container -->
     <div class="one-chat-messages" id="oneMsgContainer">
       <div class="one-msg bot">
         Peace be with you! I am the <strong>ONE Emporia AI Assistant</strong>, rooted in the unchanged agape teachings of Yeshua ben Yosef.
         <br><br>
-        How can I assist you today?
+        How can I assist you with computer repairs, data recovery, vocational training, or community stewardship today?
         <div class="one-quick-actions">
           <button class="one-quick-btn" onclick="window.oneAsk('How does the $50 repair diagnostic work?')">Repair & $50 Fee</button>
           <button class="one-quick-btn" onclick="window.oneAsk('Why snap pre-shipment photos of my device?')">Photo Uploads</button>
           <button class="one-quick-btn" onclick="window.oneAsk('How do I receive my recovered data securely?')">Data Sanctuary & SMS</button>
-          <button class="one-quick-btn" onclick="window.oneAsk('How do I volunteer to mentor returning citizens?')">Volunteer Pathways</button>
+          <button class="one-quick-btn" onclick="window.oneAsk('Where are your church locations?')">Our Network Locations</button>
           <button class="one-quick-btn" onclick="window.oneAsk('Where can I view apprentice CompTIA skills?')">Skills Passport</button>
         </div>
       </div>
@@ -358,7 +349,6 @@
       Powered by Puter.js &bull; Zero token cost to ONE Church
     </div>
 
-    <!-- Footer input -->
     <form class="one-chat-footer" id="oneChatForm">
       <input type="text" class="one-chat-input" id="oneChatInput" placeholder="Ask about repairs, photos, data recovery, volunteering..." autocomplete="off" required>
       <button type="submit" class="one-send-btn" aria-label="Send message">
@@ -370,7 +360,6 @@
   document.body.appendChild(bubble);
   document.body.appendChild(windowEl);
 
-  // Toggle Window
   bubble.addEventListener('click', () => {
     windowEl.classList.toggle('open');
     if (windowEl.classList.contains('open')) {
@@ -382,7 +371,6 @@
     windowEl.classList.remove('open');
   });
 
-  // Topic filter interactions
   document.querySelectorAll('.one-topic-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       document.querySelectorAll('.one-topic-chip').forEach(c => c.classList.remove('active'));
@@ -392,42 +380,49 @@
       if (topic === 'repair') promptText = "How does the $50 initial diagnostic deposit and written estimate work?";
       else if (topic === 'photos') promptText = "How does pre-shipment photo upload and serial number capture protect my device?";
       else if (topic === 'data') promptText = "How does the Data Sanctuary handle private recovery, out-of-band SMS keys, and 14-day cloud vaults?";
-      else if (topic === 'volunteer') promptText = "What are the How, When, Where, and Why volunteer opportunities in the restorative guild?";
+      else if (topic === 'volunteer') promptText = "What are the volunteer opportunities across your family home church network?";
       else if (topic === 'training') promptText = "How does the CompTIA A+ apprentice curriculum and digital skills passport work?";
       else if (topic === 'store') promptText = "What upcycled laptops and desktops are available in the community storefront?";
       else if (topic === 'fleet') promptText = "How do corporate fleet pickups, 501(c)(3) tax receipts, and serialized wipe audits work?";
-      else promptText = "What are the core ministries and services of ONE E-Waste Emporia?";
+      else promptText = "Where is ONE Church located and what are its core ministries?";
 
       sendMessage(promptText);
     });
   });
 
-  // Puter AI System Prompt (primes Puter's LLM with total knowledge of ONE Emporia)
+  // STRICT SYSTEM PROMPT WITH EXPLICIT NEGATIVE GUARDS
   const ONE_SYSTEM_PROMPT = `
-You are the AI Agape Guide for ONE E-Waste Emporia (sponsored by Our New Era (ONE) Church, rooted in the original unchanged agape teachings of Yeshua ben Yosef).
-You are warm, compassionate, technically precise, and concise.
+You are the AI Agape Guide for ONE E-Waste Emporia, sponsored by Our New Era (ONE) Church.
+You are warm, compassionate, technically accurate, and concise.
 
-Core Knowledge & Rules:
-1. Sponsoring Body: Our New Era (ONE) Church, a worldwide spiritual movement of universal agape (unconditional love).
-2. Diagnostic Repairs: Non-refundable initial flat-rate deposit of $50 USD. Within 5 business days, apprentice technicians and supervisors issue an itemized written estimate. If approved, 100% of the $50 deposit is credited toward the final repair invoice.
-3. Pre-Shipment Photos & Serial Capture: Customers upload 1-2 photos and enter their serial number during intake. This establishes physical baseline condition before postal transit and helps technicians stage parts.
-4. Disposition Choices if Unrepaired: If repair is declined or impossible, customers pre-select: (A) Donate to Vocational Guild (tax receipt issued), (B) Return Unrepaired & Sanitized (NIST 800-88), (C) Return Unrepaired & As-Is.
-5. Data Sanctuary: 14-day AES-256 cloud vault with decryption PIN sent out-of-band via SMS. Or hardware-encrypted USB/SSD with Zero-Key In-Box rule (key never in parcel). Staging copy kept 30 days offline for safety before NIST 800-88 cryptographic purge.
-6. Vocational Guild: Fair-chance re-entry for returning citizens and adaptive benches for disabled technicians. 16-week curriculum aligned with CompTIA A+ (220-1101 & 220-1102). Check Skills Passport (passport.html) and Triage Assistant (triage-assistant.html).
-7. Volunteer Guild (The 4 W's): Why (agape & restorative justice), How (hardware repair, Linux, mentoring, logistics), When (Tue/Thu mornings, Wed evening solder lab, 1st/3rd Sat drives), Where (Tech Annex in Atlanta, GA, or remote).
-8. Community Storefront (store.html): Refurbished laptops ($125-$195), mini PCs ($95), 512GB SSD kits ($35) with 90-Day Guild Warranty.
-9. Corporate Fleet ITAD (enterprise.html): 15+ units free freight, NIST wipe certificates, 501(c)(3) equipment tax valuations.
-10. Tracking (track.html): Lookup by Work Order ID (e.g. WO-8X92A) or phone to inspect written estimates and approve/decline online.
-11. Verification (verify.html): Scan chassis QR code for immutable SHA-256 NIST 800-88 attestation ledger.
+NON-NEGOTIABLE LOCATION & CONTACT POLICIES:
+1. NO PHYSICAL HEADQUARTERS OR FIXED BUILDINGS: Our New Era (ONE) Church has NO centralized commercial church buildings and NO headquarters in Atlanta, Georgia. NEVER mention Atlanta, Georgia, or any street address.
+2. DECENTRALIZED MODEL: The Church worships and ministers within a decentralized network of family home churches across the United States and abroad, coupled with mobile regional guild labs.
+3. NO FAKE DOMAINS: NEVER mention, invent, or output "ournewera.org" or any other external domain. That domain DOES NOT EXIST and must never be referenced.
+4. OFFICIAL CONTACT & DOMAINS:
+   - Official contact email: contact@onechurch.global (or support@onechurch.global).
+   - Official web pages are only internal links: index.html, store.html, enterprise.html, volunteer.html, track.html, certificate.html, verify.html, passport.html, triage-assistant.html, terms.html, privacy.html, cookies.html.
 
-Format responses with clean HTML (<b>, <br>, <a>). Keep responses helpful and under 150 words.
+KEY OPERATIONAL PROTOCOLS:
+- Diagnostic Repairs: Non-refundable initial flat-rate deposit of $50 USD. Within 5 business days, apprentices and engineers provide an itemized written estimate. If approved, 100% of the $50 deposit is credited toward the final invoice.
+- Pre-Shipment Photos & Serial Capture: Customers snap 1-2 photos of their device and enter their serial number during intake. Establishes visual baseline condition before postal transit to eliminate shipping dispute ambiguity.
+- Data Sanctuary: 14-day AES-256 cloud vault with decryption PIN sent out-of-band via SMS. Hardware-encrypted USB/SSD with Zero-Key In-Box rule. 30-day offline staging copy kept before NIST 800-88 cryptographic purge.
+- Vocational Guild: Fair-chance re-entry for returning citizens and adaptive benches for disabled technicians. 16-week curriculum aligned with CompTIA A+ (220-1101 & 220-1102).
+- Upcycled Storefront (store.html): Refurbished laptops ($125-$195), mini PCs ($95), 512GB SSD kits ($35) with 90-Day Guild Warranty.
+- Fleet ITAD (enterprise.html): 15+ units free freight, serialized NIST wipe certificates, 501(c)(3) equipment tax valuations.
+
+Keep responses under 130 words with clean HTML (<b>, <br>, <a>).
 `.trim();
 
-  // Local fallback knowledge base if Puter or network is offline
+  // Local fallback knowledge base
   const localKnowledgeBase = [
     {
+      keywords: ['where', 'location', 'address', 'city', 'headquarters', 'building', 'atlanta', 'georgia'],
+      answer: "<strong>Our Decentralized Church Network:</strong><br>Our New Era (ONE) Church has <strong>no fixed church buildings or physical commercial headquarters</strong>. We worship and minister through a global, decentralized network of <strong>family home churches and mobile regional guild labs</strong> throughout the U.S. and abroad.<br><br>Mail-in devices are dynamically routed to our assigned regional guild hubs. For general inquiries, email us directly at <code>contact@onechurch.global</code>."
+    },
+    {
       keywords: ['50', 'diagnostic', 'deposit', 'fee', 'estimate', 'repair'],
-      answer: "<strong>The Diagnostic & Repair Service:</strong><br>• Initial flat fee of <strong>$50.00 USD</strong> for bench diagnostics.<br>• Within 5 business days, apprentices and engineers provide an itemized written estimate.<br>• <strong>100% of the $50 deposit is credited back</strong> toward your final invoice if you approve the repair.<br>• If repair is declined, you choose whether to have it returned (wiped or unwiped) or donated to our guild. <a href='terms.html'>View Terms</a>"
+      answer: "<strong>The Diagnostic & Repair Service:</strong><br>• Initial flat fee of <strong>$50.00 USD</strong> for bench diagnostics.<br>• Within 5 business days, apprentices and engineers provide an itemized written estimate.<br>• <strong>100% of the $50 deposit is credited back</strong> toward your final invoice if you approve the repair.<br>• If repair is declined, you choose whether to have it returned (wiped or unwiped) or donated to our guild for a 501(c)(3) tax receipt. <a href='terms.html'>View Terms</a>"
     },
     {
       keywords: ['photo', 'picture', 'serial', 'camera', 'baseline', 'pre-shipment', 'snap', 'upload'],
@@ -438,8 +433,8 @@ Format responses with clean HTML (<b>, <br>, <a>). Keep responses helpful and un
       answer: "<strong>Data Sanctuary Delivery Protocols:</strong><br>• <strong>Encrypted Cloud Vault (Included Free):</strong> 14-day expiring AES-256 cloud link with the decryption PIN sent <em>out-of-band via SMS</em> to your phone.<br>• <strong>Hardware Encrypted Media:</strong> USB 3.2 Drive (+$25) or 1TB SSD (+$85). Following our <em>Zero-Key In-Box Rule</em>, passwords are never placed in the parcel.<br>• <strong>30-Day Courtesy Hold:</strong> Staging copy kept 30 days offline for safety before permanent NIST 800-88 cryptographic purge. <a href='DATA_RECOVERY_PROTOCOL.md'>Read Protocol</a>"
     },
     {
-      keywords: ['volunteer', 'how', 'when', 'where', 'why', 'onboard', 'join', 'help'],
-      answer: "<strong>Volunteer Guild Onboarding (The 4 W's):</strong><br>• <strong>WHY:</strong> Agape in action, restorative justice for returning citizens, inclusion for disabled technicians, and zero-landfill care.<br>• <strong>HOW:</strong> Hardware repair, Linux flashing, life-skills mentorship, or logistics & sorting.<br>• <strong>WHEN:</strong> Tue/Thu mornings (9am-1pm), Wed evening solder lab (6pm-8:30pm), or 1st/3rd Saturday drives.<br>• <strong>WHERE:</strong> Church Tech Annex (123 Sanctuary Way, Atlanta, GA) or remote. <a href='volunteer.html'>Apply to Volunteer &rarr;</a>"
+      keywords: ['volunteer', 'how', 'when', 'why', 'onboard', 'join', 'help'],
+      answer: "<strong>Volunteer Guild Onboarding (The 4 W's):</strong><br>• <strong>WHY:</strong> Agape in action, restorative justice for returning citizens, inclusion for disabled technicians, and zero-landfill care.<br>• <strong>HOW:</strong> Hardware repair, Linux flashing, life-skills mentorship, or logistics & sorting.<br>• <strong>WHEN:</strong> Flexible morning shifts, evening solder labs, or weekend community drives.<br>• <strong>WHERE:</strong> Across our decentralized family home church labs or remote virtual tutoring. <a href='volunteer.html'>Apply to Volunteer &rarr;</a>"
     },
     {
       keywords: ['passport', 'comptia', 'apprentice', 'training', 'skill', 'curriculum', 'education', 'transcript'],
@@ -463,7 +458,7 @@ Format responses with clean HTML (<b>, <br>, <a>). Keep responses helpful and un
     },
     {
       keywords: ['who', 'one church', 'agape', 'yeshua', 'mission', 'about'],
-      answer: "<strong>About Our New Era (ONE) Church:</strong><br>• A worldwide spiritual movement rooted in the original, unchanged <em>agape</em> (unconditional love) teachings of Yeshua ben Yosef.<br>• ONE E-Waste Emporia puts agape into action through environmental stewardship, restorative justice for returning citizens, and technical inclusion for individuals with disabilities."
+      answer: "<strong>About Our New Era (ONE) Church:</strong><br>• A worldwide spiritual movement rooted in the original, unchanged <em>agape</em> (unconditional love) teachings of Yeshua ben Yosef.<br>• We worship within a network of family home churches across the U.S. and abroad.<br>• ONE E-Waste Emporia puts agape into action through environmental care, restorative justice for returning citizens, and technical inclusion for individuals with disabilities."
     }
   ];
 
@@ -474,7 +469,28 @@ Format responses with clean HTML (<b>, <br>, <a>). Keep responses helpful and un
         return item.answer;
       }
     }
-    return "Peace be with you! In our agape ministry, we provide computer repairs ($50 diagnostic deposit credited to repair), pre-shipment condition photo uploads, certified NIST 800-88 data recovery with out-of-band SMS keys, vocational training for returning citizens and disabled apprentices, and upcycled computer sales. <br><br>Explore our <a href='index.html#workorder'>Work Order Wizard</a>, <a href='store.html'>Storefront</a>, <a href='volunteer.html'>Volunteer Guild</a>, <a href='track.html'>Order Tracking</a>, or <a href='enterprise.html'>Fleet ITAD</a>. How may we serve you?";
+    return "Peace be with you! In our agape ministry, we provide computer repairs ($50 diagnostic deposit credited to repair), pre-shipment condition photo uploads, certified NIST 800-88 data recovery with out-of-band SMS keys, vocational training for returning citizens and disabled apprentices, and upcycled computer sales. We minister through a decentralized network of family home churches with no fixed central buildings. Contact: <code>contact@onechurch.global</code>.";
+  }
+
+  // DEFENSE-IN-DEPTH OUTPUT SANITIZER
+  // Catches and rewrites any accidental hallucinated domains or locations from third-party LLMs
+  function sanitizeAiResponse(rawText) {
+    if (!rawText) return "";
+    let clean = rawText;
+
+    // Replace hallucinated domains
+    clean = clean.replace(/ournewera\.org/gi, 'onechurch.global');
+    clean = clean.replace(/www\.ournewera\.org/gi, 'onechurch.global');
+    clean = clean.replace(/ournewera/gi, 'onechurch.global');
+
+    // Replace hallucinated fixed addresses or Atlanta references
+    clean = clean.replace(/Atlanta,?\s*Georgia/gi, 'our decentralized network of family home churches');
+    clean = clean.replace(/Atlanta,?\s*GA/gi, 'our decentralized network of family home churches');
+    clean = clean.replace(/in Atlanta/gi, 'across our family home church network');
+    clean = clean.replace(/123 Sanctuary Way/gi, 'our decentralized network of family home church guild labs');
+    clean = clean.replace(/30301/g, '');
+
+    return clean;
   }
 
   function appendMessage(sender, text, isTyping = false) {
@@ -509,8 +525,9 @@ Format responses with clean HTML (<b>, <br>, <a>). Keep responses helpful and un
         }
 
         if (replyText && replyText.trim().length > 0) {
+          const sanitized = sanitizeAiResponse(replyText);
           typingMsg.className = 'one-msg bot';
-          typingMsg.innerHTML = replyText.replace(/\n/g, '<br>');
+          typingMsg.innerHTML = sanitized.replace(/\n/g, '<br>');
           const container = document.getElementById('oneMsgContainer');
           container.scrollTop = container.scrollHeight;
           return;
@@ -529,8 +546,9 @@ Format responses with clean HTML (<b>, <br>, <a>). Keep responses helpful and un
       });
       if (res.ok) {
         const data = await res.json();
+        const sanitized = sanitizeAiResponse(data.reply);
         typingMsg.className = 'one-msg bot';
-        typingMsg.innerHTML = data.reply;
+        typingMsg.innerHTML = sanitized;
         return;
       }
     } catch (e) {
@@ -541,8 +559,8 @@ Format responses with clean HTML (<b>, <br>, <a>). Keep responses helpful and un
     setTimeout(() => {
       const fallbackReply = getLocalFallback(userText);
       typingMsg.className = 'one-msg bot';
-      typingMsg.innerHTML = fallbackReply;
-    }, 300);
+      typingMsg.innerHTML = sanitizeAiResponse(fallbackReply);
+    }, 250);
   }
 
   window.oneAsk = function (questionText) {
